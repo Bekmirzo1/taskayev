@@ -1,0 +1,60 @@
+@use "sass:math";
+@import "mixins.scss";
+@import "fonts.scss";
+
+$fontFamily: "FHPremier";
+$fontSize: toRem(14);
+
+$mainColor: #1a1a1a;
+$grayColor: #c5c5c5;
+$redColor: #fb262f;
+$orangeColor: #df8c47;
+$greenColor: #0d7c3b;
+
+// Настройки адаптивной сетки ===============================================================================================================================================================================================================================================================================================
+$minWidth: 320;
+$maxWidth: 1920;
+$maxWidthContainer: 1872;
+$containerPadding: 24;
+$containerPaddingMob: 16;
+
+// Ширина срабатываемых брейкпоинтов
+$containerWidth: $maxWidthContainer + $containerPadding * 2;
+$tablet: 1023.98;
+$mob: 767.98;
+$mobSmall: 479.98;
+
+// Брейк-поинты
+$md1: em($containerWidth - 0.02); // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
+$md2: em($tablet); // Планшеты, некоторые телефоны в горизонтальном положении
+$md3: em($mob); // Телефоны L
+$md4: em($mobSmall); // Телефоны S
+//====================================================================================================
+// Header options
+$headerHeight: 88;
+$headerMobHeight: 64;
+
+@import "null";
+html {
+  scroll-behavior: smooth;
+  // color-scheme: dark;
+}
+
+body {
+  height: 200vh;
+}
+
+[class*="__container"],
+.container {
+  max-width: toRem($maxWidthContainer);
+  margin: 0 auto;
+  padding: 0 toRem($containerPadding);
+  @media (max-width: $md3) {
+    padding: toRem(0) toRem($containerPaddingMob);
+  }
+}
+
+
+
+@import "common";
+@import "forms";

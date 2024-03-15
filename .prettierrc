@@ -1,0 +1,7 @@
+{
+  "tabWidth": 2,
+  "semi": false,
+  "htmlWhitespaceSensitivity": "ignore",
+  "bracketSameLine": true,
+  "quoteProps": "preserve"
+}

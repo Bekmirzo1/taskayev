@@ -1,0 +1,16 @@
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  &:focus {
+    outline: none;
+  }
+}
+textarea.input {
+  resize: none;
+  // padding: 0 0;
+}
