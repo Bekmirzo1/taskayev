@@ -1,16 +1,41 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-const development: boolean = process.env.NODE_ENV !== "production";
+const development: boolean = process.env.NODE_ENV !== "production"
 
-export default defineNuxtConfig( {
+export default defineNuxtConfig({
   devtools: { enabled: false },
   srcDir: "src/",
   app: {
-    baseURL: development ? "/" : "/sites/taskayev/",
+    // layoutTransition: { name: 'page', mode: 'out-in' },
+    // baseURL: development ? "/" : "/sites/taskayev/",
     // baseURL: '/',
   },
   pages: true,
+  build: {
+    transpile: [
+      "gsap"
+    ]
+  },
   modules: [
-    'nuxt-viewport'
+    [
+      "nuxt-viewport",
+      {
+        breakpoints: {
+          desktopWide: 1920,
+          desktop: 1439.98,
+          tabletWide: 1279.98,
+          tablet: 1023.98,
+          mob: 767.98,
+          mobSmall: 479.98,
+          minSize: 375,
+        },
+        defaultBreakpoints: {
+          desktop: "desktop",
+          tablet: "tablet",
+          mob: "mob",
+        },
+      },
+    ],
+    "@pinia/nuxt",
   ],
   components: {
     global: true,
@@ -34,13 +59,15 @@ export default defineNuxtConfig( {
       // }
     ],
   },
+  
   vite: {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "src/app/assets/scss/style.scss";',
+          additionalData:
+            ' @use "sass:math"; @import "src/app/assets/scss/style.scss";',
         },
       },
     },
   },
-} )
+})

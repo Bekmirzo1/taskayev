@@ -28,24 +28,34 @@ const element = props.href == "" || props.href ? "a" : "button"
   position: relative;
   z-index: 1;
   border-radius: toRem(50);
-  border: toRem(1) solid $mainColor;
+  display: inline-flex;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: toRem(50);
+    border: toRem(1) solid $mainColor;
+  }
   // text-transform: uppercase;
-  &:hover {
-    .btn__body {
-      transform: translate(0, -100%);
+  @media (any-hover: hover) {
+    &:hover {
+      .btn__body {
+        transform: translate(0, -100%);
+      }
     }
   }
   // .btn__body
   &__body {
-    @extend .text;
+    @extend .text-pc;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: toRem(14);
-    line-height: percent(21, 14);
     font-weight: 500;
-    padding: toRem(4) toRem(11) toRem(5);
+    padding: toRem(4) toRem(11) toRem(3);
     transition: transform 0.3s cubic-bezier(0.5, 1, 0.89, 1) 0s;
     will-change: transform;
     // .btn__body_original

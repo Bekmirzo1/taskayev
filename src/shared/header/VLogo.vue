@@ -26,9 +26,9 @@ defineProps({
 </template>
 <style lang="scss" scoped>
 .logo {
-  @extend .text;
+  @extend .text-pc;
   text-transform: uppercase;
-  letter-spacing: -2%;
+  letter-spacing: -0.02em;
   cursor: pointer;
   // .logo__body
   &__body {

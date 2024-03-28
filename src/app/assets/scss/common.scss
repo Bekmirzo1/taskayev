@@ -4,17 +4,47 @@
   font-weight: 700;
 }
 
-.text {
+//====================================================================================================
+$ltrSpace: -0.02em;
+@mixin textMob () {
+  @media (max-width: $md3) {
+    font-size: toRem(12);
+    line-height: percent(15, 12);
+  }
+}
+
+@mixin text () {
+  font-size: $fontSize;
+  letter-spacing: -0.02em;
   line-height: percent(21, 14);
 }
+
+.text-pc {
+  line-height: percent(21, 14);
+  letter-spacing: -0.02em;
+}
+
+.text-mob {
+  @include textMob;
+}
+
+.text {
+  @extend .text-pc;
+  @extend .text-mob;
+}
+
+
 
 .nowrap {
   white-space: nowrap;
 }
 
+//====================================================================================================
+
 .link-anim {
   display: inline;
   position: relative;
+
   &::before {
     content: "";
     position: absolute;
@@ -27,6 +57,7 @@
     transition: transform 0.3s ease 0s;
     transform: scaleX(0);
   }
+
   @media (any-hover: hover) {
     &:hover {
       &::before {

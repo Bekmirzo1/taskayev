@@ -36,7 +36,7 @@
 	"VButton": {
 		"scope": "html, vue",
 		"prefix": "vbtn",
-		"body": "<v-button type=\"button\" ${1:href=\"\" target=\"_blank\"}>\n\t${0:@ivantaskayev}\n</v-button>"
+		"body": "<v-button ${2:type=\"button\"} ${1:href=\"\" target=\"_blank\"}>\n\t${0:@ivantaskayev}\n</v-button>"
 	},
 	"Gap for scss": {
 		"scope": "scss",
@@ -170,6 +170,15 @@
 		"}"
 		]
 	},
+	"media max-width md0": {
+		"scope": "scss",
+		"prefix": "@mxd0",
+		"body": [
+			"@media (max-width: \\$md0) {"
+			"    $0"
+		"}"
+		]
+	},
 	"media max-width md1 ": {
 		"scope": "scss",
 		"prefix": "@mxd1",
@@ -211,6 +220,15 @@
 		"prefix": "@mn",
 		"body": [
 			"@media (min-width: em($1)) {"
+			"    $0"
+		"}"
+		]
+	},
+	"media min-width m0": {
+		"scope": "scss",
+		"prefix": "@mnd0",
+		"body": [
+			"@media (min-width: \\$md0) {"
 			"    $0"
 		"}"
 		]

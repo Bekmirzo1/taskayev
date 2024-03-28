@@ -6,6 +6,9 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "path-autocomplete.pathMappings": {
     "@img/": "${folder}/src/app/assets/images/"
   },
