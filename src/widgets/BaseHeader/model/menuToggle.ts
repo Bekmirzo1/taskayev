@@ -3,10 +3,14 @@ import { menuOpenedClosed } from "../store/"
 
 export let menuAction = false
 
-export const menuToggle = (open: boolean) => {
+export function menuToggle(open: boolean, time?: number) {
+  if (!time) {
+    time = 700
+  }
+  
   if (menuAction === false) {
     menuAction = true
-    menuOpenedClosed().changeOpened();
+    menuOpenedClosed().changeOpened()
     if (open === true) {
       menuOpen()
     } else if (open === false) {
@@ -14,7 +18,7 @@ export const menuToggle = (open: boolean) => {
     }
     setTimeout(() => {
       menuAction = false
-    }, 700)
+    }, time)
     return true
   }
 }

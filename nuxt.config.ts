@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   srcDir: "src/",
   app: {
     // layoutTransition: { name: 'page', mode: 'out-in' },
-    // baseURL: development ? "/" : "/sites/taskayev/",
+    baseURL: development ? "/" : "/sites/taskayev/",
     // baseURL: '/',
   },
   pages: true,
@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     ]
   },
   modules: [
+    // nuxt viewport
     [
       "nuxt-viewport",
       {

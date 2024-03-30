@@ -1,34 +1,20 @@
 <script setup lang="ts">
-import { menuToggle } from "../model/"
 import { menuOpenedClosed } from "../store/"
-const props = defineProps({
-  openText: {
-    value: String,
-    required: false,
-    default: "меню",
-  },
-  closeText: {
-    value: String,
-    required: false,
-    default: "закрыть",
-  },
-})
 
-// const openClosed = menuOpenedClosed()
+const openClosed = menuOpenedClosed()
 const closeElem: Ref<null | HTMLElement> = ref(null)
 const openElem: Ref<null | HTMLElement> = ref(null)
 
 
-function toggleActive() {
-  menuToggle(!menuOpenedClosed().opened)
-}
 </script>
 <template>
   <button
     type="button"
     class="menu-button"
-    :class="{ active: menuOpenedClosed().opened }"
-    @click="toggleActive"
+    :class="{
+      active: openClosed.opened,
+    }"
+    
     :style="{
       '--close-width':
         closeElem != null ? closeElem.offsetWidth + 'px' : '80px',
@@ -38,12 +24,12 @@ function toggleActive() {
       <span
         class="menu-button__body-inner menu-button__body-inner_open"
         ref="openElem">
-        {{ openText }}
+        меню
       </span>
       <span
         class="menu-button__body-inner menu-button__body-inner_close"
         ref="closeElem">
-        {{ closeText }}
+        закрыть
       </span>
     </div>
   </button>
@@ -55,7 +41,7 @@ function toggleActive() {
   right: toRem(16);
   z-index: 99;
   line-height: 0;
-  $trsVal: 0.3s;
+  $trsVal: 0.5s;
   &.active {
     .menu-button__body {
       // width: var(--close-width);
@@ -87,7 +73,7 @@ function toggleActive() {
     border-radius: toRem(50);
     padding: toRem(0) toRem(10);
     // transition: padding $trsVal ease 0s;
-    @include transMultiple(padding border-color, $trsDur, ease, 0s);
+    @include transMultiple(padding border-color, $trsVal, ease, 0s);
     overflow: hidden;
     will-change: padding;
   }
