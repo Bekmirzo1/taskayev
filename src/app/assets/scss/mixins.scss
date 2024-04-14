@@ -16,7 +16,7 @@
   @return $result;
 }
 //VW
-@function vw($px, $from: $containerWidth) {
+@function vw($px, $from: $maxWidth) {
   $result: math.div($px, $from) * 100vw;
   @return $result;
 }

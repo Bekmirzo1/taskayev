@@ -12,7 +12,8 @@ export default defineNuxtConfig({
   pages: true,
   build: {
     transpile: [
-      "gsap"
+      "gsap",
+      "gsap/CustomEase"
     ]
   },
   modules: [

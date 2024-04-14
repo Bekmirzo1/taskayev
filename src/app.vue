@@ -1,31 +1,40 @@
 <script setup lang="ts">
-import gsap from "gsap"
-import { BaseHeader, MenuMob } from "@/widgets/BaseHeader/"
-import { PreloadElem, pageAnimState } from "./shared/helpers/pageTransition"
+import gsap from "gsap";
+import { pageLoadState } from "@/app/store";
+import { BaseHeader, MenuMob } from "@/widgets/BaseHeader/";
+import { PreloadElem, pageAnimState } from "@/shared/helpers/pageTransition";
 
-const animState = pageAnimState()
-const { enter, leave, covered } = storeToRefs(animState)
-const wrapper = ref(null)
-const prelEl = ref(null)
+const animState = pageAnimState();
+const pageLoaded = pageLoadState();
+const { enter, leave, covered } = storeToRefs(animState);
+// const { loaded } = storeToRefs(pageLoaded);
+const loaded = ref(false);
+const wrapper = ref(null);
+const prelEl = ref(null);
+animState.coverChange(true);
 onMounted(() => {
+  loaded.value = true;
+  setTimeout(() => {
+    animState.coverChange(false);
+  }, 0);
   // const tl = gsap.timeline({ defaults: { duration: 1 } })
   watch(leave, (newVal) => {
     if (newVal == true) {
       gsap.set(prelEl.value.elemPreload, {
         yPercent: 100,
         autoAlpha: 1,
-      })
+      });
       gsap
         .timeline({
           onComplete() {
-            animState.coverChange(true)
-            animState.leaveChange(false)
+            animState.coverChange(true);
+            animState.leaveChange(false);
           },
           paused: true,
           defaults: { duration: 1, ease: "power3.inOut" },
         })
         .to(wrapper.value, {
-          y: -20,
+          y: "7vh",
           scale: 0.9,
         })
         .to(
@@ -33,9 +42,9 @@ onMounted(() => {
           { yPercent: 0, duration: 0.8, ease: "power2.inOut" },
           "<",
         )
-        .play()
+        .play();
     }
-  })
+  });
   watch(enter, (newVal) => {
     if (newVal == true) {
       gsap
@@ -43,10 +52,10 @@ onMounted(() => {
           paused: true,
           onComplete() {
             if (covered.value == true) {
-              animState.coverChange(false)
+              animState.coverChange(false);
             }
             if (enter.value == true) {
-              animState.enterChange(false)
+              animState.enterChange(false);
             }
           },
           defaults: {
@@ -62,15 +71,15 @@ onMounted(() => {
           autoAlpha: 0,
           delay: 0.5,
         })
-        .play()
+        .play();
     }
-  })
-})
+  });
+});
 </script>
 <template>
   <div class="app">
     <MenuMob></MenuMob>
-    <div class="wrapper" ref="wrapper">
+    <div class="wrapper" ref="wrapper" :class="{ 'loaded': loaded }">
       <BaseHeader></BaseHeader>
       <NuxtPage class="page"></NuxtPage>
     </div>
@@ -90,6 +99,7 @@ onMounted(() => {
 .app {
   min-height: 100vh;
   flex: 1 1 auto;
+
   // min-height: 100%;
   // overflow: hidden;
   &__cover {
@@ -97,6 +107,14 @@ onMounted(() => {
   }
 }
 
+.wrapper {
+  visibility: hidden;
+  opacity: 0;
+  &.loaded {
+    opacity: 1;
+    visibility: visible;
+  }
+}
 .page {
   background-color: $bgColor;
   min-height: 100vh;
