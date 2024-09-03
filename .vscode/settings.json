@@ -13,6 +13,7 @@
     "@img/": "${folder}/src/app/assets/images/"
   },
   "typescript.suggestionActions.enabled": false,
+  "path-autocomplete.extensionOnImport": false
   // "typescript.validate.enable": false,
   // "javascript.validate.enable": false,
 }

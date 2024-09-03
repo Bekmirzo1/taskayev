@@ -1,145 +1,30 @@
 <script setup lang="ts">
-import gsap from "gsap";
-import { pageLoadState } from "@/app/store";
-import { BaseHeader, MenuMob } from "@/widgets/BaseHeader/";
-import { PreloadElem, pageAnimState } from "@/shared/helpers/pageTransition";
-
-const animState = pageAnimState();
-const pageLoaded = pageLoadState();
-const { enter, leave, covered } = storeToRefs(animState);
-// const { loaded } = storeToRefs(pageLoaded);
-const loaded = ref(false);
-const wrapper = ref(null);
-const prelEl = ref(null);
-animState.coverChange(true);
-onMounted(() => {
-  loaded.value = true;
-  setTimeout(() => {
-    animState.coverChange(false);
-  }, 0);
-  // const tl = gsap.timeline({ defaults: { duration: 1 } })
-  watch(leave, (newVal) => {
-    if (newVal == true) {
-      gsap.set(prelEl.value.elemPreload, {
-        yPercent: 100,
-        autoAlpha: 1,
-      });
-      gsap
-        .timeline({
-          onComplete() {
-            animState.coverChange(true);
-            animState.leaveChange(false);
-          },
-          paused: true,
-          defaults: { duration: 1, ease: "power3.inOut" },
-        })
-        .to(wrapper.value, {
-          y: "7vh",
-          scale: 0.9,
-        })
-        .to(
-          prelEl.value.elemPreload,
-          { yPercent: 0, duration: 0.8, ease: "power2.inOut" },
-          "<",
-        )
-        .play();
+import { BaseHeader } from "./widgets/BaseHeader/";
+/* import { MediaStore } from "@/shared/libs/media/";
+const mediaStore = MediaStore();
+let info = false;
+watch(
+  () => mediaStore.mediaMax,
+  () => {
+    if (info == false && mediaStore.checkMedia("laptop")) {
+      info = true;
+      console.log(info);
+    } else if (info == true && !mediaStore.checkMedia("laptop")) {
+      info = false;
+      console.log(info);
     }
-  });
-  watch(enter, (newVal) => {
-    if (newVal == true) {
-      gsap
-        .timeline({
-          paused: true,
-          onComplete() {
-            if (covered.value == true) {
-              animState.coverChange(false);
-            }
-            if (enter.value == true) {
-              animState.enterChange(false);
-            }
-          },
-          defaults: {
-            duration: 0.5,
-          },
-        })
-        .set(wrapper.value, {
-          y: 0,
-          scale: 1,
-        })
-        .to(prelEl.value.elemPreload, {
-          // yPercent: -100,
-          autoAlpha: 0,
-          delay: 0.5,
-        })
-        .play();
-    }
-  });
-});
+  },
+); */
 </script>
 <template>
   <div class="app">
-    <MenuMob></MenuMob>
-    <div class="wrapper" ref="wrapper" :class="{ 'loaded': loaded }">
-      <BaseHeader></BaseHeader>
-      <NuxtPage class="page"></NuxtPage>
-    </div>
-    <PreloadElem ref="prelEl" class="app__cover"></PreloadElem>
+    <BaseHeader />
+    <NuxtPage class="page" />
   </div>
 </template>
+
 <style lang="scss">
-#__nuxt {
-  min-height: 100%;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  @supports (overflow: clip) {
-    overflow: clip;
-  }
-}
 .app {
-  min-height: 100vh;
-  flex: 1 1 auto;
-
-  // min-height: 100%;
-  // overflow: hidden;
-  &__cover {
-    z-index: 1000;
-  }
-}
-
-.wrapper {
-  visibility: hidden;
-  opacity: 0;
-  &.loaded {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-.page {
-  background-color: $bgColor;
-  min-height: 100vh;
-}
-.page-enter-active,
-.page-leave-active {
-  transition: all 0.4s;
-  // animation: anim-page 2s ease 0s;
-  opacity: 1;
-  filter: blur(0);
-}
-
-// @keyframes anim-page {
-//   0% {
-//     background-color: #fff;
-//     transform: translate(0, 100%);
-//   }
-//   100% {
-//     transform: translate(0, 0%);
-//   }
-// }
-
-.page-enter-from,
-.page-leave-to {
-  opacity: 0;
-  filter: blur(1rem);
+  overflow: hidden;
 }
 </style>

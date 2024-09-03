@@ -1,0 +1,140 @@
+.header {
+  mix-blend-mode: difference;
+  color: #fff;
+  @media (min-width: $md3) {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99;
+  }
+
+  // .header__container
+  &__container {
+    @media (min-width: $md2) {
+      padding: toRem(0) toRem(20);
+    }
+  }
+
+  // .header__body
+  &__body {
+    display: flex;
+    align-items: center;
+    min-height: toRem($headerHeight);
+    // color: red;
+    // color: #fff;
+    padding: toRem(5) toRem(0);
+    @extend .text;
+
+    @media (min-width: $md0) {
+      justify-content: space-between;
+    }
+
+    @media (max-width: $md3) {
+      justify-content: space-between;
+    }
+
+  }
+
+  // .header__logo
+  &__logo {}
+
+  // .header__discuss
+  &__discuss {
+    // -webkit-font-smoothing: auto;
+
+    @media (max-width: $md0) {
+      flex: 1 1 auto;
+      margin: toRem(0) toRem(0) toRem(0) toRem(125);
+    }
+    @media (max-width: $md1) {
+      margin: toRem(0) toRem(0) toRem(0) toRem(60);
+        
+    }
+
+    @media (max-width: $md2) {
+      margin: toRem(0) toRem(0) toRem(0) toRem(90);
+    }
+
+    @media (max-width: $md3) {
+      flex: 0 1 auto;
+      margin: 0;
+    }
+
+    // .header__discuss-link
+    &-link {}
+  }
+
+  // .header__time
+  &__time {
+    @media (max-width: $md0) {
+        margin: toRem(0) toRem(101) toRem(0) toRem(0);
+    }
+    @media (max-width: $md1) {
+      display: none;
+    }
+  }
+
+  // .header__nav
+  &__nav {
+    @media (max-width: $md3) {
+      display: none;
+    }
+  }
+
+  // .header__nav-list
+  &__nav-list {
+    display: flex;
+
+    li {
+      &:not(:last-child) {
+        margin-right: toRem(69);
+
+        @media (max-width: $md1) {
+          margin-right: toRem(50);
+        }
+
+        @media (max-width: $md2) {
+          margin-right: toRem(25);
+        }
+      }
+
+      &::first-letter {
+        text-transform: uppercase;
+      }
+
+      .router-link-active {
+        // color: $mainLight;
+        opacity: 0.24;
+      }
+    }
+  }
+}
+
+.link-underline {
+  position: relative;
+
+  @media (any-hover: hover) {
+    &:hover {
+      &::after {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    bottom: 0%;
+    left: 0;
+    height: toRem(1);
+    background-color: currentColor;
+    @include transMultiple(opacity visibility, $trsDur, ease, 0s);
+  }
+}
+
+.current-time {
+  @extend .text;
+}

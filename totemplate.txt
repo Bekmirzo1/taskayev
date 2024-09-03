@@ -1,0 +1,3 @@
+Обновить nuxt.config.ts
+Изменить package.json
+Добавить папку source

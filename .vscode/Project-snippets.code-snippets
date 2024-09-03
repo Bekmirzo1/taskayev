@@ -488,7 +488,7 @@
 	"img": {
 		"scope": "html",
 		"prefix": "img",
-		"body": "<img src=\"@/app/assets/images$0\" alt=\"\">"
+		"body": "<img src=\"@/shared/assets/images$0\" alt=\"\">"
 	},
 	"video": {
 		"scope": "html",

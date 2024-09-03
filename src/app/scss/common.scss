@@ -1,0 +1,70 @@
+.nowrap {
+  white-space: nowrap;
+}
+
+.ibg {
+  position: relative;
+
+  img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+  }
+}
+
+.block {
+  display: block;
+}
+
+//====================================================================================================
+// TITLES
+.title {
+  font-family: $secondFamily;
+  font-size: toRem(40);
+  line-height: 120%;
+  // font-weight: 700;
+}
+.title2 {
+  font-family: $secondFamily;
+  font-size: toRem(22);
+  line-height: percent(23, 22);
+  letter-spacing: $letterSpacing;
+  // font-weight: 400;
+}
+
+//====================================================================================================
+@mixin text () {
+  font-size: toRem(18);
+  letter-spacing: $letterSpacing;
+  line-height: percent(20, 18);
+  font-weight: 700;
+}
+
+@mixin text2 () {
+  font-size: toRem(14);
+  line-height: percent(15, 14);
+  letter-spacing: -0.03em;
+}
+
+// TEXTS
+.text {
+  @include text();
+  -webkit-font-smoothing: antialiased;
+  @media (max-width: $md0) {
+    @include text2();
+  }
+}
+
+.text2 {
+  @include text2();
+}
+
+.textby {
+  font-family: $thirdFamily;
+  font-size: toRem(10);
+  line-height: percent(11, 10);
+  letter-spacing: $letterSpacing;
+}

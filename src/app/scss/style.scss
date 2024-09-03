@@ -1,0 +1,81 @@
+@use "sass:math";
+@import "mixins.scss";
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro:regular,italic,700,700italic);
+@import "fonts.scss";
+
+$fontFamily: "Anonymous Pro";
+$secondFamily: 'ExposureTrialVAR';
+$thirdFamily: '5by7';
+
+
+$fontSize: toRem(18);
+
+$letterSpacing: -0.04em;
+
+$mainColor: #141414;
+$mainLight: rgba(20, 20, 20, 0.24);
+$whiteColor: #fff;
+
+// Настройки адаптивной сетки ===============================================================================================================================================================================================================================================================================================
+$minWidth: 375;
+$maxWidth: 1920;
+$maxWidthContainer: 1170;
+$containerPadding: 24;
+$containerPaddingMob: 12;
+
+$maxHeight: 1080;
+
+// Ширина срабатываемых брейкпоинтов
+$containerWidth: $maxWidth - 0.02;
+$laptop: 1365.98;
+$tablet: 995.98;
+$mob: 767.98;
+$mobSmall: 479.98;
+
+// Брейк-поинты
+$md0: em($containerWidth - 0.02); // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
+$md1: em($laptop - 0.02); // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
+$md2: em($tablet); // Планшеты, некоторые телефоны в горизонтальном положении
+$md3: em($mob); // Телефоны L
+$md4: em($mobSmall); // Телефоны S
+//====================================================================================================
+// Header options
+$headerHeight: 50;
+// $headerHeightAdapt: 44;
+
+@import "null";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: $whiteColor;
+}
+
+body {
+  font-weight: 700;
+}
+
+.page {
+  // padding: toRem($headerHeight) toRem(0) toRem(0) toRem(0);
+
+  // @media (max-width: $md3) {
+  //   padding: toRem($headerMobHeight) toRem(0) toRem(0) toRem(0);
+  // }
+}
+
+[class*="__container"],
+.container {
+  // max-width: toRem(1749);
+  margin: 0 auto;
+  padding: toRem(0) toRem(12);
+
+  @media (min-width: $md2) {
+    padding: 0 toRem(24);
+
+  }
+}
+
+@import "common";
+@import "forms";

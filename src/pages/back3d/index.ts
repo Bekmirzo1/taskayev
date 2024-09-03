@@ -1,0 +1,1 @@
+export {default as Threebg } from './Threebg.vue';

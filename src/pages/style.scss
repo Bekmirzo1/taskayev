@@ -1,0 +1,101 @@
+.fullscreen {
+  min-height: 100vh;
+  position: relative;
+
+  // .fullscreen__center
+  &__center {}
+
+  // .fullscreen__items
+  &__items {}
+
+  // .fullscreen__item
+  &__item {
+    position: absolute;
+    bottom: percent(528, $maxHeight);
+    left: 0;
+
+    @media (max-width: $md2) {
+      bottom: percent(258, 540);
+    }
+
+    &:first-child {
+      left: percent(495, $maxWidth);
+
+      @media (max-width: $md0) {
+        left: percent(244, $laptop);
+      }
+
+      @media (max-width: $md1) {
+        left: percent(171, $tablet);
+      }
+
+      @media (max-width: $md2) {
+        left: percent(47, $mob);
+      }
+    }
+
+    &:nth-child(2) {
+      left: percent(970, $maxWidth);
+
+      @media (max-width: $md0) {
+        left: percent(581, $laptop);
+      }
+
+      @media (max-width: $md1) {
+        left: percent(330, $tablet);
+      }
+
+      @media (max-width: $md2) {
+        left: percent(201, $mob);
+      }
+    }
+
+    &:nth-child(3) {
+      left: percent(1287, $maxWidth);
+
+      @media (max-width: $md0) {
+        left: percent(805, $laptop);
+      }
+
+      @media (max-width: $md1) {
+        left: percent(489, $tablet);
+      }
+
+      @media (max-width: $md2) {
+        left: percent(390, $mob);
+      }
+    }
+
+    &:nth-child(4) {
+      left: percent(1602, $maxWidth);
+
+      @media (max-width: $md0) {
+        left: percent(1094, $laptop);
+        // right: percent(132, $laptop);
+      }
+
+      @media (max-width: $md1) {
+        // left: auto;
+        left: percent(799, $tablet);
+        // right: percent(47, $tablet);
+      }
+
+      @media (max-width: $md2) {
+        left: percent(611, $mob);
+        // right: percent(49, $mob);
+      }
+    }
+  }
+
+  // .fullscreen__item-text
+  &__item-text {
+    @extend .title2;
+  }
+
+  // .fullscreen__item-image
+  &__item-image {
+    @extend .ibg;
+    width: toRem(140);
+    padding-bottom: percent(180, 140);
+  }
+}
