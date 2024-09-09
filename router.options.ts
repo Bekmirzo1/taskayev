@@ -1,32 +1,36 @@
 import type { RouterConfig } from "@nuxt/schema";
+import { PAGE_ROUTES } from "@/shared/config";
+import { AboutPage } from "@/views/AboutPage";
 
 export default {
   // https://router.vuejs.org/api/interfaces/routeroptions.html#routes
   routes: (_routes) => [
     {
       name: "home",
-      path: "/",
+      path: PAGE_ROUTES.home,
       component: () => import("@/pages/index.vue").then((r) => r.default || r),
     },
     {
       name: "about",
-      path: "/about",
-      component: () => import("@/pages/about.vue").then((r) => r.default || r),
+      path: PAGE_ROUTES.about,
+      component: () => import("@/views/AboutPage/AboutPage.vue").then((r) => r.default || r),
+      // component: () => AboutPage.then((r: typeof AboutPage) => r.default || r),
+      // component: () => import("@/pages/about.vue").then((r) => r.default || r),
     },
     {
       name: "works",
-      path: "/works",
+      path: PAGE_ROUTES.work,
       component: () => import("@/pages/works.vue").then((r) => r.default || r),
     },
     {
       name: "service",
-      path: "/service",
+      path: PAGE_ROUTES.service,
       component: () =>
         import("@/pages/service.vue").then((r) => r.default || r),
     },
     {
       name: "contact",
-      path: "/contact",
+      path: PAGE_ROUTES.contact,
       component: () =>
         import("@/pages/contact.vue").then((r) => r.default || r),
     },

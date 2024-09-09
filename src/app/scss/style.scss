@@ -1,6 +1,6 @@
 @use "sass:math";
 @import "mixins.scss";
-@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro:regular,italic,700,700italic);
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import "fonts.scss";
 
 $fontFamily: "Anonymous Pro";
@@ -15,6 +15,8 @@ $letterSpacing: -0.04em;
 $mainColor: #141414;
 $mainLight: rgba(20, 20, 20, 0.24);
 $whiteColor: #fff;
+
+$menuEase: cubic-bezier(0.8, 0, 0.1, 1);
 
 // Настройки адаптивной сетки ===============================================================================================================================================================================================================================================================================================
 $minWidth: 375;
@@ -43,10 +45,22 @@ $md4: em($mobSmall); // Телефоны S
 $headerHeight: 50;
 // $headerHeightAdapt: 44;
 
+
+
 @import "null";
 
 html {
   scroll-behavior: smooth;
+  --container-padding: #{toRem($containerPaddingMob)};
+
+  @media (min-width: $md2) {
+    --container-padding: #{toRem($containerPadding)};
+  }
+
+  @media (max-width: $md3) {
+    --menu-mob-height: #{toRem(40)};
+    --menu-mob-from-top: #{toRem(100)};
+  }
 }
 
 body {
@@ -55,6 +69,14 @@ body {
 
 body {
   font-weight: 700;
+
+  .lock & {
+    overflow: hidden;
+    @supports (overflow: clip) {
+      overflow: clip
+    }
+  }
+  
 }
 
 .page {
@@ -69,12 +91,7 @@ body {
 .container {
   // max-width: toRem(1749);
   margin: 0 auto;
-  padding: toRem(0) toRem(12);
-
-  @media (min-width: $md2) {
-    padding: 0 toRem(24);
-
-  }
+  padding: 0 var(--container-padding);
 }
 
 @import "common";

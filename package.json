@@ -10,16 +10,20 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/kit": "^3.13.1",
     "@pinia/nuxt": "^0.5.4",
     "@types/three": "^0.168.0",
-    "nuxt": "^3.13.0",
+    "gsap": "^3.12.5",
+    "nuxt": "^3.13.1",
     "pinia": "^2.2.2",
     "three": "^0.168.0",
     "vue": "latest"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^0.5.3",
+    "@nuxt/eslint": "^0.5.5",
+    "eslint": "^9.9.1",
     "prettier": "^3.3.3",
-    "sass": "^1.77.8"
+    "sass": "^1.77.8",
+    "typescript": "^5.5.4"
   }
 }

@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import LogoMain from "~/shared/components/LogoMain.vue";
-import { MediaStore } from "~/shared/libs/media";
+import LogoMain from "@/shared/components/LogoMain.vue";
+import CurrentTime from "@/shared/components/CurrentTime.vue";
+import { MediaStore } from "@/shared/libs/media";
+import { MenuStore, pageLinks } from "../model/";
 const mediaStore = MediaStore();
-// const route = useRoute();
-// console.log(route);
+const menuStore = MenuStore();
 
-const links = [
-  { link: "/", name: "index" },
-  { link: "/about", name: "Обо мне" },
-  { link: "/works", name: "Работы" },
-  { link: "/service", name: "Услуги" },
-  { link: "/contact", name: "Контакты" },
-];
+watch(
+  () => mediaStore.checkMedia("mob"),
+  (newVal) => {
+    if (newVal == false && menuStore.opened) {
+      menuStore.immediateClose();
+    }
+  },
+);
 </script>
 <template>
   <header class="header">
@@ -24,18 +26,18 @@ const links = [
           <a
             href="https://t.me/ivantaskayev"
             target="_blank"
-            class="header__discuss-link link-underline">
+            class="header__discuss-link">
             Обсудить проект
           </a>
         </div>
         <div v-if="!mediaStore.checkMedia('laptop')" class="header__time">
-          <div class="current-time">03:03:30 PM (NSK)</div>
+          <CurrentTime />
         </div>
         <nav v-if="!mediaStore.checkMedia('mob')" class="header__nav">
           <ul class="header__nav-list">
-            <li v-for="(link, i) in links" :key="i">
+            <li v-for="(link, i) in pageLinks" :key="i">
               <nuxt-link :to="link.link">
-                {{ link.name + (i !== links.length - 1 ? "," : "") }}
+                {{ link.name + (i !== pageLinks.length - 1 ? "," : "") }}
               </nuxt-link>
             </li>
           </ul>
@@ -45,5 +47,5 @@ const links = [
   </header>
 </template>
 <style lang="scss" scoped>
-@import "style.scss";
+@import "styles/style.scss";
 </style>

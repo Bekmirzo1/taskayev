@@ -1,12 +1,16 @@
 .header {
   mix-blend-mode: difference;
   color: #fff;
+
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99;
   @media (min-width: $md3) {
     position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 99;
+  }
+  @media (max-width: $md3) {
+      position: absolute;
   }
 
   // .header__container
@@ -25,7 +29,7 @@
     // color: #fff;
     padding: toRem(5) toRem(0);
     @extend .text;
-
+    -webkit-text-stroke: toRem(0) currentColor;
     @media (min-width: $md0) {
       justify-content: space-between;
     }
@@ -47,9 +51,10 @@
       flex: 1 1 auto;
       margin: toRem(0) toRem(0) toRem(0) toRem(125);
     }
+
     @media (max-width: $md1) {
       margin: toRem(0) toRem(0) toRem(0) toRem(60);
-        
+
     }
 
     @media (max-width: $md2) {
@@ -62,14 +67,17 @@
     }
 
     // .header__discuss-link
-    &-link {}
+    &-link {
+      @extend .link-underline;
+    }
   }
 
   // .header__time
   &__time {
     @media (max-width: $md0) {
-        margin: toRem(0) toRem(101) toRem(0) toRem(0);
+      margin: toRem(0) toRem(101) toRem(0) toRem(0);
     }
+
     @media (max-width: $md1) {
       display: none;
     }
@@ -103,38 +111,21 @@
         text-transform: uppercase;
       }
 
+      a {
+        &:not(.router-link-active) {
+          @media (any-hover: hover) {
+            transition: opacity 0.3s ease 0s;
+            &:hover {
+              opacity: 0.24;
+            }
+          }
+        }
+      }
+
       .router-link-active {
         // color: $mainLight;
         opacity: 0.24;
       }
     }
   }
-}
-
-.link-underline {
-  position: relative;
-
-  @media (any-hover: hover) {
-    &:hover {
-      &::after {
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    bottom: 0%;
-    left: 0;
-    height: toRem(1);
-    background-color: currentColor;
-    @include transMultiple(opacity visibility, $trsDur, ease, 0s);
-  }
-}
-
-.current-time {
-  @extend .text;
 }

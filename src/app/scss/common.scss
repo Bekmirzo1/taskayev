@@ -25,14 +25,16 @@
   font-family: $secondFamily;
   font-size: toRem(40);
   line-height: 120%;
-  // font-weight: 700;
+  font-weight: 400;
+  font-variation-settings: "EXPO" -55;
 }
 .title2 {
   font-family: $secondFamily;
   font-size: toRem(22);
   line-height: percent(23, 22);
-  letter-spacing: $letterSpacing;
-  // font-weight: 400;
+  font-weight: 400;
+  font-variation-settings: "EXPO" -45;
+  // letter-spacing: $letterSpacing;
 }
 
 //====================================================================================================
@@ -41,18 +43,21 @@
   letter-spacing: $letterSpacing;
   line-height: percent(20, 18);
   font-weight: 700;
+  -webkit-text-stroke: 0.4px currentColor;
 }
 
 @mixin text2 () {
   font-size: toRem(14);
   line-height: percent(15, 14);
   letter-spacing: -0.03em;
+  -webkit-text-stroke: 0.3px currentColor;
 }
 
 // TEXTS
 .text {
   @include text();
   -webkit-font-smoothing: antialiased;
+
   @media (max-width: $md0) {
     @include text2();
   }
@@ -60,11 +65,38 @@
 
 .text2 {
   @include text2();
+  font-weight: 700;
 }
 
 .textby {
   font-family: $thirdFamily;
   font-size: toRem(10);
+  font-weight: 400;
   line-height: percent(11, 10);
   letter-spacing: $letterSpacing;
+}
+
+//====================================================================================================
+.link-underline {
+  position: relative;
+
+  @media (any-hover: hover) {
+    &:hover {
+      &::after {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    bottom: 0%;
+    left: 0;
+    height: toRem(1);
+    background-color: currentColor;
+    @include transMultiple(opacity visibility, $trsDur, ease, 0s);
+  }
 }

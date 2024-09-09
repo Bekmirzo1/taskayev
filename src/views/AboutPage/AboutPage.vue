@@ -1,11 +1,11 @@
 <script setup lang="ts">
 useHead({
-  title: 'My'
+  title: 'About'
 })
 </script>
 <template>
-  <div>
-    
+  <div class="about">
+    About
   </div>
 </template>
 <style lang="scss" scoped>

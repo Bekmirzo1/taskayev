@@ -1,0 +1,123 @@
+.menu {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: $mainColor;
+  z-index: 100;
+  color: #fff;
+  overflow-y: auto;
+  transition: transform 0.8s $menuEase 0s;
+  transform: translate(0, -100%);
+  display: flex;
+  flex-direction: column;
+
+  &.opened {
+    transform: translate(0, 0);
+  }
+
+  &.close-immediate {
+    transform: translate(0, -100%);
+    transition: none !important;
+  }
+
+  // .menu__wrapper
+  &__wrapper {
+    position: relative;
+    flex: 1 1 auto;
+  }
+
+  // .menu__container
+  &__container {}
+
+  // .menu__body
+  &__body {}
+
+  // .menu__header
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: toRem(20);
+    justify-content: space-between;
+    min-height: toRem($headerHeight);
+  }
+
+  // .menu__logo
+  &__logo {}
+
+  // .menu__discuss
+  &__discuss {}
+
+  // .menu__discuss-link
+  &__discuss-link {
+    @extend .text2;
+    @extend .link-underline;
+  }
+
+  // .menu__main
+  &__main {
+    padding: toRem(67.5) toRem(0) toRem(100);
+  }
+
+  // .menu__header2
+  &__header2 {}
+
+  // .menu__rows
+  &__rows {}
+
+  // .menu__row
+  &__row {
+    &:not(:last-child) {
+      margin-bottom: toRem(53.5);
+    }
+
+    // .menu__row-body
+    &-body {
+      position: relative;
+      padding: toRem(24) toRem(0) toRem(0) toRem(0);
+
+      &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: toRem(1);
+        top: 0;
+        left: 0;
+        background-color: currentColor;
+        opacity: 0.24;
+      }
+    }
+  }
+
+  // .menu__row-title
+  &__row-title {
+    @extend .text2;
+    opacity: 0.24;
+  }
+
+  // .menu__list
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: toRem(13) toRem(20);
+
+    li {
+      a {
+        @include text;
+      }
+    }
+  }
+
+  // .menu__time
+  &__time {
+    position: absolute;
+    bottom: toRem(36);
+    left: var(--container-padding);
+    @extend .text2;
+
+    @media (max-width: $md4) {
+      bottom: toRem(16);
+    }
+  }
+}

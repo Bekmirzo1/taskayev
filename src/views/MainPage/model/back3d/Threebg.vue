@@ -5,23 +5,19 @@ onMounted(() => {
     const height = document.body.clientHeight;
     const width = document.body.clientWidth;
 
-    canvas.width = width * window.devicePixelRatio;
-    canvas.height = height * window.devicePixelRatio;
-
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
+
+    canvas.width = window.innerWidth * window.devicePixelRatio;
+    canvas.height = window.innerHeight * window.devicePixelRatio;
   };
 
   // Define the canvas and webgl context
   const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
   retinaFy(canvas);
 
-  window.addEventListener("resize", () => {
-    retinaFy(canvas);
-  });
-
   // Retinafy the canvas before getting the webgl context
-  const gl = canvas.getContext("webgl");
+  let gl = canvas.getContext("webgl");
 
   // Define the time, which is used to calculate progression
   let lastUpdate = new Date().getTime();
@@ -205,10 +201,10 @@ onMounted(() => {
 `;
 
   // Create the shaders
-  const vertexShader = compileShader(gl.VERTEX_SHADER, vertex, gl);
-  const fragmentShader = compileShader(gl.FRAGMENT_SHADER, fragment, gl);
+  let vertexShader = compileShader(gl.VERTEX_SHADER, vertex, gl);
+  let fragmentShader = compileShader(gl.FRAGMENT_SHADER, fragment, gl);
 
-  const program = createProgram(gl, vertexShader, fragmentShader);
+  let program = createProgram(gl, vertexShader, fragmentShader);
 
   const array = [
     -1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0,
@@ -218,12 +214,12 @@ onMounted(() => {
   const bufferArray = new Float32Array(array);
 
   // Create a buffer
-  const buffer = gl.createBuffer();
+  let buffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
   gl.bufferData(gl.ARRAY_BUFFER, bufferArray, gl.STATIC_DRAW);
 
   // look up where the vertex data needs to go.
-  const positionLocation = gl.getAttribLocation(program, "a_position");
+  let positionLocation = gl.getAttribLocation(program, "a_position");
   const dimensionCount = 2; // 2D
 
   gl.enableVertexAttribArray(positionLocation);
@@ -256,9 +252,50 @@ onMounted(() => {
     // Requestanimationframe
     window.requestAnimationFrame(draw);
   };
+  window.addEventListener(
+    "resize",
+    () => {
+      setTimeout(() => {
+        retinaFy(canvas);
+        gl = canvas.getContext("webgl");
+        vertexShader = compileShader(gl.VERTEX_SHADER, vertex, gl);
+        fragmentShader = compileShader(gl.FRAGMENT_SHADER, fragment, gl);
 
-  // draw
+        program = createProgram(gl, vertexShader, fragmentShader);
+        buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, bufferArray, gl.STATIC_DRAW);
+        positionLocation = gl.getAttribLocation(program, "a_position");
+        gl.enableVertexAttribArray(positionLocation);
+        gl.vertexAttribPointer(
+          positionLocation,
+          dimensionCount,
+          gl.FLOAT,
+          false,
+          0,
+          0,
+        );
+        gl.useProgram(program);
+
+    gl.uniform2f(uniforms.resolution, canvas.width, canvas.height);
+
+    const currentTime = new Date().getTime();
+    const timeSinceLastUpdate = currentTime - lastUpdate;
+    lastUpdate = currentTime;
+
+    timer += timeSinceLastUpdate ? timeSinceLastUpdate / 1000 : 0.05;
+
+    // console.log((Math.cos(timer)) * 0.1 + 0.1);
+    // Pass time to the vertex and fragment shader
+    gl.uniform1fv(uniforms.time, [timer]);
+
+    gl.drawArrays(gl.TRIANGLES, 0, array.length / dimensionCount);
+      }, 0);
+    },
+    false,
+  );
   draw();
+  // draw
 });
 </script>
 <template>
@@ -274,5 +311,7 @@ canvas {
   margin: 0;
   overflow: hidden;
   z-index: -1;
+  // opacity: 0.2;
+  mix-blend-mode: luminosity;
 }
 </style>

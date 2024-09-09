@@ -1,11 +1,8 @@
 <script setup lang="ts">
+import { AboutPage } from "@/views/AboutPage/";
 
 </script>
 <template>
-  <div>
-    About
-  </div>
+  <AboutPage />
 </template>
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

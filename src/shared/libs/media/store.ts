@@ -1,5 +1,4 @@
-import { mediaChange, mediasArray } from "./model";
-import { mediasObj } from "./model";
+import { mediaChange, mediasArray, mediasObj } from "./model";
 
 export const MediaStore = defineStore("media-viewport", () => {
   const medias = ref(mediasArray);
@@ -17,7 +16,8 @@ export const MediaStore = defineStore("media-viewport", () => {
       : medias.value[medias.value.length - 1].value;
   });
   // const checkMedia = (val: typeof mediasObj[keyof typeof mediasObj]) => val >= mediaMax.value;
-  const checkMedia = (val: keyof typeof mediasObj) => mediasObj[val] >= mediaMax.value;
+  const checkMedia = (val: keyof typeof mediasObj) =>
+    mediasObj[val] >= mediaMax.value;
 
-  return { medias, mediaMax, checkMedia };
+  return { mediaMax, checkMedia };
 });
