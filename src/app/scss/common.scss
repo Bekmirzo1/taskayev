@@ -28,6 +28,7 @@
   font-weight: 400;
   font-variation-settings: "EXPO" -55;
 }
+
 .title2 {
   font-family: $secondFamily;
   font-size: toRem(22);
@@ -43,21 +44,20 @@
   letter-spacing: $letterSpacing;
   line-height: percent(20, 18);
   font-weight: 700;
-  -webkit-text-stroke: 0.4px currentColor;
+  -webkit-text-stroke: toRem(0.4) currentColor;
 }
 
 @mixin text2 () {
   font-size: toRem(14);
   line-height: percent(15, 14);
   letter-spacing: -0.03em;
-  -webkit-text-stroke: 0.3px currentColor;
+  -webkit-text-stroke: toRem(0.3) currentColor;
 }
 
 // TEXTS
 .text {
   @include text();
-  -webkit-font-smoothing: antialiased;
-
+  paint-order: stroke fill;
   @media (max-width: $md0) {
     @include text2();
   }
@@ -65,6 +65,7 @@
 
 .text2 {
   @include text2();
+  paint-order: stroke fill;
   font-weight: 700;
 }
 

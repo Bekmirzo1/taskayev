@@ -35,4 +35,8 @@ export default {
         import("@/pages/contact.vue").then((r) => r.default || r),
     },
   ],
+  // scrollBehavior() {
+  //   // always scroll to top
+  //   return { top: 0 }
+  // },
 } satisfies RouterConfig;

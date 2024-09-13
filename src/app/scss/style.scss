@@ -63,18 +63,14 @@ html {
   }
 }
 
-body {
-  background-color: $whiteColor;
-}
 
 body {
   font-weight: 700;
+  background-color: $whiteColor;
 
-  .lock & {
-    overflow: hidden;
-    @supports (overflow: clip) {
-      overflow: clip
-    }
+  overflow: hidden;
+  .unlock & {
+    overflow: auto;
   }
   
 }

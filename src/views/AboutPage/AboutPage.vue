@@ -9,5 +9,7 @@ useHead({
   </div>
 </template>
 <style lang="scss" scoped>
-
+.about{
+  min-height: 200vh;
+}
 </style>

@@ -2,9 +2,11 @@
 import { MenuStore, pageLinks, socialLinks } from "../model/";
 import LogoMain from "@/shared/components/LogoMain.vue";
 import CurrentTime from "@/shared/components/CurrentTime.vue";
-import { SOCIAL_LINKS } from "@/shared/config/social-links";
+import { SOCIAL_LINKS } from "@/shared/config/";
 import HeaderMobBody from "./HeaderMobBody.vue";
+import { LoadStore } from "@/shared/store";
 const menuStore = MenuStore();
+const loadState = LoadStore();
 function closeMenu() {
   menuStore.menuOpen(false);
 }
@@ -20,6 +22,7 @@ router.beforeEach((to, from, next) => {
 </script>
 <template>
   <div
+    v-if="loadState.fullLoaded"
     class="menu"
     :class="{
       opened: menuStore.opened,

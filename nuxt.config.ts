@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: false },
   srcDir: "src/",
-  modules: ["@nuxt/eslint", "@pinia/nuxt"],
+  modules: ["@nuxt/eslint", "@pinia/nuxt", "@nuxtjs/device"],
   build: {
     // Без этого (transpile: ["gsap"]) проект c gsap не генерится в production
     transpile: ["gsap"], // https://nuxt.com/docs/api/nuxt-config#transpile

@@ -23,7 +23,7 @@ useHead({
           </div>
           <div v-if="!mediaStore.checkMedia('mob')" class="fullscreen__item">
             <div class="fullscreen__item-image">
-              <img src="@/shared/assets/images/home/main.jpg" alt="" />
+              <img src="@/shared/assets/images/home/main.jpg" alt="">
             </div>
           </div>
         </div>

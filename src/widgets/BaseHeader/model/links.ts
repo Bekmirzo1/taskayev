@@ -1,5 +1,5 @@
 import { PAGE_ROUTES } from "@/shared/config";
-import { SOCIAL_LINKS } from "@/shared/config/social-links";
+import { SOCIAL_LINKS } from "@/shared/config/";
 interface LinkObj {
   link: string
   name: string

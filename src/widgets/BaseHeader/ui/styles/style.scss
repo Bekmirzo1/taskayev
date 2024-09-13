@@ -29,7 +29,7 @@
     // color: #fff;
     padding: toRem(5) toRem(0);
     @extend .text;
-    -webkit-text-stroke: toRem(0) currentColor;
+    // -webkit-text-stroke: toRem(0) currentColor;
     @media (min-width: $md0) {
       justify-content: space-between;
     }
