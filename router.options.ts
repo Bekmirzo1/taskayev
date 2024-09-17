@@ -8,12 +8,16 @@ export default {
     {
       name: "home",
       path: PAGE_ROUTES.home,
+      meta: {
+        header: "main",
+      },
       component: () => import("@/pages/index.vue").then((r) => r.default || r),
     },
     {
       name: "about",
       path: PAGE_ROUTES.about,
-      component: () => import("@/views/AboutPage/AboutPage.vue").then((r) => r.default || r),
+      component: () =>
+        import("@/views/AboutPage/AboutPage.vue").then((r) => r.default || r),
       // component: () => AboutPage.then((r: typeof AboutPage) => r.default || r),
       // component: () => import("@/pages/about.vue").then((r) => r.default || r),
     },

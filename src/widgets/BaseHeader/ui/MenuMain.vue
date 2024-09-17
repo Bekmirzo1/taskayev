@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { MenuStore, pageLinks, socialLinks } from "../model/";
-import LogoMain from "@/shared/components/LogoMain.vue";
-import CurrentTime from "@/shared/components/CurrentTime.vue";
-import { SOCIAL_LINKS } from "@/shared/config/";
-import HeaderMobBody from "./HeaderMobBody.vue";
+// import LogoMain from "@/shared/components/LogoMain.vue";
+import HeaderMobBody from "./components/HeaderMobBody.vue";
 import { LoadStore } from "@/shared/store";
+import { LogoBase } from "@/shared/UI/Logo";
+import LinkBegin from "./components/LinkBegin.vue";
 const menuStore = MenuStore();
 const loadState = LoadStore();
 function closeMenu() {
@@ -19,6 +19,7 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+
 </script>
 <template>
   <div
@@ -33,22 +34,16 @@ router.beforeEach((to, from, next) => {
         <div class="menu__body">
           <div class="menu__header">
             <div class="menu__logo">
-              <LogoMain />
+              <LogoBase />
             </div>
             <div class="menu__discuss">
-              <a
-                class="menu__discuss-link"
-                :href="SOCIAL_LINKS.telegram"
-                target="_blank">
-                Обсудить проект
-              </a>
+              <LinkBegin class="menu__discuss-link" />
             </div>
           </div>
           <nav class="menu__main">
             <div class="menu__header2">
               <HeaderMobBody
-                active-value="Меню"
-                button-value="Закрыть"
+                button-value="Свернуть"
                 @click-button="closeMenu" />
             </div>
             <div class="menu__rows">
@@ -74,9 +69,6 @@ router.beforeEach((to, from, next) => {
             </div>
           </nav>
         </div>
-      </div>
-      <div class="menu__time">
-        <CurrentTime />
       </div>
     </div>
   </div>

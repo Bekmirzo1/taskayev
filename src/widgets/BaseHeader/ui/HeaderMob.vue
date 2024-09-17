@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { MenuStore, pageLinks } from "../model";
-import HeaderMobBody from "./HeaderMobBody.vue";
+import HeaderMobBody from "./components/HeaderMobBody.vue";
 import MenuMain from "./MenuMain.vue";
 const header2Top = useTemplateRef("header-top");
 const headerFixed = ref(false);
@@ -26,6 +26,7 @@ onMounted(() => {
   observer2.observe(header2Top.value as Element);
 });
 const menuStore = MenuStore();
+
 function openMenu() {
   menuStore.menuOpen(true);
 }
@@ -38,7 +39,7 @@ function openMenu() {
         :active-value="
           pageLinks.find((item) => item.link == route.path)?.name as string
         "
-        button-value="Инфо"
+        button-value="Меню"
         class="header2__body"
         @click-button="openMenu" />
     </div>

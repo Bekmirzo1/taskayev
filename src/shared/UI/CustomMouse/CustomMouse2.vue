@@ -104,8 +104,8 @@ onMounted(() => {
     // top: toRem(-15);
     // left: toRem(-15);
     // transform: translate(-50%, -50%);
-    width: toRem(10);
-    height: toRem(10);
+    width: toRem(15);
+    height: toRem(15);
     // border-radius: 50%;
     // background-color: red;
     opacity: 1;
@@ -138,7 +138,7 @@ onMounted(() => {
         top: 0;
         left: 0;
         background-color: #fff;
-        transition: transform 0.3s ease 0s;
+        transition: transform 0.3s ease-in-out 0s;
       }
     }
   }

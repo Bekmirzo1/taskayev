@@ -15,6 +15,7 @@ $letterSpacing: -0.04em;
 $mainColor: #141414;
 $mainLight: rgba(20, 20, 20, 0.24);
 $whiteColor: #fff;
+$blueColor: #9CCAE1;
 
 $menuEase: cubic-bezier(0.8, 0, 0.1, 1);
 
@@ -43,7 +44,7 @@ $md4: em($mobSmall); // Телефоны S
 //====================================================================================================
 // Header options
 $headerHeight: 50;
-// $headerHeightAdapt: 44;
+$headerMobHeight: 50;
 
 
 
@@ -53,7 +54,7 @@ html {
   scroll-behavior: smooth;
   --container-padding: #{toRem($containerPaddingMob)};
 
-  @media (min-width: $md2) {
+  @media (min-width: $md1) {
     --container-padding: #{toRem($containerPadding)};
   }
 
@@ -69,10 +70,11 @@ body {
   background-color: $whiteColor;
 
   overflow: hidden;
+
   .unlock & {
     overflow: auto;
   }
-  
+
 }
 
 .page {

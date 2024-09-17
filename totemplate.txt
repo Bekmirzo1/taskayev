@@ -1,3 +1,6 @@
 Обновить nuxt.config.ts
 Изменить package.json
 Добавить папку source
+
+
+В mixins.scss изменить rem в adaptiveValue на toRem

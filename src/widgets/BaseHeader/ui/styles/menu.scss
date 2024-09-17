@@ -4,9 +4,9 @@
   height: 100%;
   top: 0;
   left: 0;
-  background-color: $mainColor;
+  background-color: $blueColor;
   z-index: 100;
-  color: #fff;
+  // color: #fff;
   overflow-y: auto;
   transition: transform 0.8s $menuEase 0s;
   transform: translate(0, -100%);
@@ -41,18 +41,20 @@
     gap: toRem(20);
     justify-content: space-between;
     min-height: toRem($headerHeight);
+    @extend .text2-link;
+    -webkit-text-stroke: toRem(0.8);
   }
 
   // .menu__logo
-  &__logo {}
+  &__logo {
+    
+  }
 
   // .menu__discuss
   &__discuss {}
 
   // .menu__discuss-link
   &__discuss-link {
-    @extend .text2;
-    @extend .link-underline;
   }
 
   // .menu__main
@@ -61,7 +63,9 @@
   }
 
   // .menu__header2
-  &__header2 {}
+  &__header2 {
+    margin: toRem(0) toRem(0) toRem(8.5) toRem(0);
+  }
 
   // .menu__rows
   &__rows {}
@@ -92,32 +96,25 @@
 
   // .menu__row-title
   &__row-title {
-    @extend .text2;
+    @extend .text2-link;
     opacity: 0.24;
+    margin: toRem(0) toRem(0) toRem(8.5) toRem(0);
   }
 
   // .menu__list
   &__list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: toRem(13) toRem(20);
+    gap: toRem(20);
 
     li {
       a {
         @include text;
+        @include text_low;
+        user-select: none;
       }
     }
   }
 
-  // .menu__time
-  &__time {
-    position: absolute;
-    bottom: toRem(36);
-    left: var(--container-padding);
-    @extend .text2;
-
-    @media (max-width: $md4) {
-      bottom: toRem(16);
-    }
-  }
+  
 }

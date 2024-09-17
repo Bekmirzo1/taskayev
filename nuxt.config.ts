@@ -48,6 +48,14 @@ export default defineNuxtConfig({
   //     },
   //   ],
   // },
+  // dir: {
+  //   assets: "app/scss/",
+  // },
+  // nitro: {
+  //   compressPublicAssets: {
+  //     brotli: !development,
+  //   },
+  // },
   vite: {
     css: {
       preprocessorOptions: {

@@ -3,7 +3,7 @@ import { BaseHeader, HeaderMob } from "@/widgets/BaseHeader/";
 import gsap from "gsap";
 import { PreloadElem } from "./app/Preload";
 import { MediaStore } from "./shared/libs/media";
-import { CustomMouse2 } from "./shared/components/CustomMouse/";
+import { CustomMouse2 } from "./shared/UI/CustomMouse";
 import { productionMode } from "@/shared/config/";
 import { LoadStore, PageLockStore } from "./shared/store";
 
@@ -23,6 +23,7 @@ const coverPagesElem = useTemplateRef("coverBetweenRef");
 const wrapperElem = useTemplateRef("wrapperRef");
 const pageTranstition = ref(false);
 const preloadCoverDuration = 0.8;
+
 if (productionMode) {
   router.beforeEach((to, form, next) => {
     if (pageTranstition.value == true) {
@@ -93,6 +94,8 @@ onMounted(() => {
     if (isDesktop) {
       document.documentElement.classList.add("custom-cursor");
     }
+  } else {
+    lockState.unLockPage();
   }
 });
 
@@ -168,6 +171,7 @@ if (productionMode) {
         <div class="cover-app__full"></div>
       </div>
       <CustomMouse2 v-if="productionMode" />
+      <!-- <CustomMouse2  /> -->
     </ClientOnly>
   </div>
 </template>
@@ -204,6 +208,7 @@ html.custom-cursor,
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+
   @supports (overflow: clip) {
     overflow: clip;
   }

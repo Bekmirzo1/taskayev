@@ -2,8 +2,14 @@
   position: relative;
   min-height: 100vh;
 
+
+
   @media (min-width: $md2) {
     min-height: clamp(toRem(550), 100vh, toRem(9999));
+  }
+
+  @media (min-width: $md0) {
+    min-height: clamp(toRem(800), 100vh, toRem(9999));
   }
 
   @media (max-width: $md2) {
@@ -19,8 +25,7 @@
     @media (max-width: $md3) {
       position: absolute;
       width: 100%;
-      top: 50%;
-      transform: translate(0, -50%);
+      bottom: 50%;
       left: 0;
     }
   }
@@ -28,9 +33,8 @@
   // .fullscreen__items
   &__items {
     @media (max-width: $md3) {
-      display: flex;
-      align-items: center;
-      padding: toRem(0) toRem(47);
+      padding: toRem(0) var(--container-padding);
+      margin: toRem(0) toRem(0) toRem(36) toRem(0);
     }
   }
 
@@ -38,7 +42,9 @@
   &__item {
     @media (min-width: $md3) {
       position: absolute;
-      bottom: percent(528, $maxHeight);
+      transform: translate(0, 50%);
+      bottom: 50%;
+      // bottom: percent(528, $maxHeight);
       left: 0;
 
       @media (max-width: $md2) {
@@ -46,31 +52,26 @@
       }
 
       &:first-child {
-        left: percent(495, $maxWidth);
+        left: percent(178, $maxWidth);
 
         @media (max-width: $md0) {
-          left: percent(244, $laptop);
+          left: percent(132, $laptop);
         }
 
         @media (max-width: $md1) {
-          left: percent(171, $tablet);
+          left: toRem(47);
         }
-
-        @media (max-width: $md2) {
-          left: percent(47, $mob);
-        }
-
       }
 
       &:nth-child(2) {
-        left: percent(970, $maxWidth);
+        left: percent(653, $maxWidth);
 
         @media (max-width: $md0) {
-          left: percent(581, $laptop);
+          left: percent(469, $laptop);
         }
 
         @media (max-width: $md1) {
-          left: percent(330, $tablet);
+          left: percent(251, $tablet);
         }
 
         @media (max-width: $md2) {
@@ -86,7 +87,7 @@
         }
 
         @media (max-width: $md1) {
-          left: percent(489, $tablet);
+          left: percent(569, $tablet);
         }
 
         @media (max-width: $md2) {
@@ -94,42 +95,40 @@
         }
       }
 
-      &:nth-child(4) {
-        left: percent(1602, $maxWidth);
+      // &:nth-child(4) {
+      //   left: percent(1602, $maxWidth);
 
-        @media (max-width: $md0) {
-          left: percent(1094, $laptop);
-          // right: percent(132, $laptop);
-        }
+      //   @media (max-width: $md0) {
+      //     left: percent(1094, $laptop);
+      //     // right: percent(132, $laptop);
+      //   }
 
-        @media (max-width: $md1) {
-          // left: auto;
-          left: percent(799, $tablet);
-          // right: percent(47, $tablet);
-        }
+      //   @media (max-width: $md1) {
+      //     // left: auto;
+      //     left: percent(799, $tablet);
+      //     // right: percent(47, $tablet);
+      //   }
 
-        @media (max-width: $md2) {
-          left: percent(611, $mob);
-          // right: percent(49, $mob);
-        }
-      }
+      //   @media (max-width: $md2) {
+      //     left: percent(611, $mob);
+      //     // right: percent(49, $mob);
+      //   }
+      // }
     }
 
     @media (max-width: $md3) {
-      &:first-child {
-        margin: toRem(0) toRem(71) toRem(0) toRem(0);
-      }
-
-      &:nth-child(2) {
-        flex: 1 1 auto;
-      }
-    }
-
-    @media (max-width: $md4) {
       &:not(:last-child) {
-        margin: toRem(0) toRem(19) toRem(0) toRem(0);
+        &::after {
+          content: " ";
+
+        }
+      }
+
+      &:nth-child(3) {
+        display: block;
       }
     }
+
 
 
     // .fullscreen__item-text
@@ -149,94 +148,127 @@
   // .fullscreen__inter
   &__inter {
     position: absolute;
-    left: toRem(20);
-    bottom: percent(391, $maxHeight);
-    max-width: toRem(365);
+    top: clamp(toRem(114), vh(114), toRem(400));
+    // left: toRem(20);
+    left: percent(653, $maxWidth);
+
+    @media (max-width: $md0) {
+      top: clamp(toRem(72), vh(72, 688), toRem(300));
+    }
 
     @media (max-width: $md1) {
-      max-width: toRem(290);
+      left: var(--container-padding);
+      top: clamp(toRem(93), vh(93, 540), toRem(200));
     }
 
     @media (max-width: $md3) {
       top: 50%;
-      bottom: auto;
-      left: toRem($containerPaddingMob);
       margin: toRem(30) 0px 0px 0px;
+    }
+
+    // .fullscreen__inter-text
+    &-text {
+      @extend .text;
+      -webkit-text-stroke: 0;
+    }
+
+    // .fullscreen__inter-begin
+    &-begin {
+      margin: toRem(80) toRem(0) toRem(0) toRem(0);
+      @extend .text-link;
+
+      @media (max-width: $md0) {
+        margin: toRem(40) toRem(0) toRem(0) toRem(0);
+      }
     }
   }
 
-  // .fullscreen__inter-text
-  &__inter-text {
-    @extend .text;
-    -webkit-text-stroke: 0;
-    // color: #fff;
-    // mix-blend-mode: difference;
-  }
 
   // .fullscreen__work
   &__work {
     position: absolute;
-    bottom: percent(118, $maxHeight);
-    left: percent(971, $maxWidth);
-    display: flex;
+    right: var(--container-padding);
+    bottom: var(--container-padding);
+    // bottom: percent(118, $maxHeight);
+    // left: percent(971, $maxWidth);
 
-    @media (max-width: $md0) {
-      bottom: toRem(45);
+    @media (max-width: $md1) {
+      bottom: toRem(16);
+    }
+
+    // .fullscreen__work-body
+    &-body {
+      display: flex;
+      border: toRem(1) solid $mainColor;
+      background-color: $whiteColor;
     }
 
     // .fullscreen__work-image
     &-image {
-      width: toRem(295);
-      flex: 0 0 toRem(295);
-
-      @media (max-width: $md0) {
-        width: toRem(203);
-        flex: 0 0 toRem(203);
-      }
-
-      @media (max-width: $md1) {
-        width: toRem(146);
-        flex: 0 0 toRem(146);
-      }
+      flex: 0 0 auto;
+      padding: toRem(6) toRem(0) toRem(6) toRem(6);
 
       // .fullscreen__work-image-body
       &-body {
         @extend .ibg;
+        width: toRem(320);
         display: block;
-        padding-bottom: 100%;
+        padding-bottom: percent(240, 320);
+        @include adaptiveValue("width", 320, 220, $maxWidth, $laptop, 1);
+
+        @media (max-width: $md0) {
+          padding-bottom: percent(165, 220);
+        }
+
+        @media (max-width: $md1) {
+          width: toRem(200);
+        }
       }
     }
 
-
     // .fullscreen__work-content
     &-content {
-      padding: toRem(6) toRem(0) toRem(11) toRem(0);
-      margin: toRem(0) toRem(0) toRem(0) toRem(20);
+      padding: toRem(20);
       flex: 1 1 auto;
-      max-width: toRem(200);
+      // max-width: toRem(200);
       display: flex;
       flex-direction: column;
+
+      @media (max-width: $md1) {
+        padding: toRem(16);
+      }
     }
 
     // .fullscreen__work-top
     &-top {
-      font-size: toRem(12);
+      @extend .text;
+      -webkit-text-stroke: 0;
+      margin: toRem(0) toRem(0) toRem(40) toRem(0);
+
+      @media (max-width: $md0) {
+        margin: toRem(0) toRem(0) toRem(20) toRem(0);
+      }
+    }
+
+    // .fullscreen__work-main
+    &-main {
       flex: 1 1 auto;
-      margin: toRem(0) toRem(0) toRem(24) toRem(0);
+      margin: toRem(0) toRem(0) toRem(25) toRem(0);
+    }
+
+    // .fullscreen__work-title
+    &-title {
+      @extend .text;
+      text-transform: uppercase;
+      margin: toRem(0) toRem(0) toRem(10) toRem(0);
     }
 
     // .fullscreen__work-text
     &-text {
-      max-width: toRem(134);
-      margin: toRem(0) toRem(0) toRem(73) toRem(0);
-      @extend .textby;
-      color: $mainColor;
-      opacity: 0.56;
+      @extend .text;
+      -webkit-text-stroke: 0;
       text-transform: uppercase;
 
-      @media (max-width: $md0) {
-        margin: toRem(0) toRem(0) toRem(48) toRem(0);
-      }
 
       @media (max-width: $md1) {
         margin: toRem(0) toRem(0) toRem(20) toRem(0);
@@ -244,37 +276,83 @@
     }
 
     // .fullscreen__work-bottom
-    &-bottom {
-      @extend .text;
+    &-bottom {}
+
+    // .fullscreen__work-link
+    &-link {
+      @extend .text-link;
+      @extend .link-underline;
       text-transform: uppercase;
     }
   }
 
   // .fullscreen__time
-  &__time {
-    position: absolute;
-    bottom: toRem(32);
-    left: toRem(12);
-    @extend .text;
-  }
+  // &__time {
+  //   position: absolute;
+  //   bottom: toRem(32);
+  //   left: toRem(12);
+  //   @extend .text;
+  // }
 
   // .fullscreen__bottom-image
   &__bottom-image {
     position: absolute;
-    width: clamp(toRem(128), percent(128, 480), toRem(150));
-    bottom: toRem(36);
-    right: toRem(12);
+    width: clamp(toRem(140), percent(140, $maxWidth), toRem(240));
+    bottom: var(--container-padding);
+    left: var(--container-padding);
 
-    @media (max-width: $md4) {
-      width: toRem(120);
-      bottom: toRem(16);
-      right: toRem(12);
+    @media (max-width: $md0) {
+      width: clamp(toRem(114), percent(114, $laptop), toRem(200));
     }
+
+    @media (max-width: $md1) {
+      width: toRem(114);
+      bottom: toRem(16);
+      left: var(--container-padding);
+    }
+
+    @media (max-width: $md4) {}
 
     // .fullscreen__bottom-image-body
     &-body {
       @extend .ibg;
       padding-bottom: percent(176, 128);
+    }
+  }
+
+  // .fullscreen__forms
+  &__forms {
+    position: absolute;
+    pointer-events: none;
+    width: 100%;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: toRem(0) toRem(77);
+
+    @media (max-width: $md0) {
+      padding: toRem(0) toRem(54);
+    }
+
+    @media (max-width: $md1) {
+      padding: toRem(0) var(--container-padding);
+    }
+
+  }
+
+  // .fullscreen__form
+  &__form {
+    width: toRem(23);
+    height: toRem(23);
+    line-height: 0;
+    background-color: $mainColor;
+    pointer-events: auto;
+
+    @media (max-width: $md3) {
+      width: toRem(12);
+      height: toRem(12);
     }
   }
 

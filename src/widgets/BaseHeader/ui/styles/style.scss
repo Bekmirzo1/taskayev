@@ -1,34 +1,83 @@
 .header {
-  mix-blend-mode: difference;
-  color: #fff;
+
 
   width: 100%;
   top: 0;
   left: 0;
   z-index: 99;
+
+  &:deep(path) {
+    fill: $mainColor;
+  }
+
   @media (min-width: $md3) {
     position: fixed;
+    mix-blend-mode: difference;
+    color: #fff;
+
+    &:deep(path) {
+      fill: #fff;
+    }
   }
+
   @media (max-width: $md3) {
+    position: absolute;
+  }
+
+  &.bigger {
+    @media (min-width: $md3) {
       position: absolute;
+    }
+
+    .header__body {
+      align-items: flex-start;
+      padding: 0;
+
+    }
+
+    .header__main {
+      padding: toRem(20) toRem(0) toRem(0) toRem(0);
+    }
+
+    .header__logo {
+      padding: toRem(14) toRem(0) toRem(0) toRem(0);
+
+      @media (max-width: $md0) {
+        padding: toRem(16) toRem(0) toRem(0) toRem(0);
+      }
+
+      @media (max-width: $md1) {
+        padding: toRem(13) toRem(0) toRem(0) toRem(0);
+      }
+
+      @media (max-width: $md3) {
+        padding: toRem(12) toRem(0) toRem(0) toRem(0);
+      }
+
+      // height: 100%;
+      // align-self: self-start;
+    }
+
+
   }
 
   // .header__container
   &__container {
-    @media (min-width: $md2) {
-      padding: toRem(0) toRem(20);
-    }
+    // @media (min-width: $md2) {
+    //   padding: toRem(0) toRem(20);
+    // }
   }
 
   // .header__body
   &__body {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     min-height: toRem($headerHeight);
     // color: red;
     // color: #fff;
     padding: toRem(5) toRem(0);
-    @extend .text;
+
     // -webkit-text-stroke: toRem(0) currentColor;
     @media (min-width: $md0) {
       justify-content: space-between;
@@ -36,51 +85,68 @@
 
     @media (max-width: $md3) {
       justify-content: space-between;
+      min-height: toRem($headerMobHeight);
+    }
+
+    @extend .text-link;
+    @media (max-width: $md3) {
+      -webkit-text-stroke: toRem(0.8);
     }
 
   }
 
   // .header__logo
-  &__logo {}
+  &__logo {
+    @media (min-width: $md1) {
+      flex: 0 0 percent(633, $containerWidth - $containerPadding * 2);
+      // flex: 0 0 calc(percent(633, $containerWidth) - var(--container-padding));
+
+    }
+  }
+
+  // .header__main
+  &__main {
+    display: flex;
+    align-items: center;
+
+    @media (min-width: $md1) {
+      flex: 1 1 auto;
+    }
+  }
 
   // .header__discuss
   &__discuss {
     // -webkit-font-smoothing: auto;
 
-    @media (max-width: $md0) {
-      flex: 1 1 auto;
-      margin: toRem(0) toRem(0) toRem(0) toRem(125);
-    }
+    // @media (max-width: $md0) {
+    //   flex: 1 1 auto;
+    //   margin: toRem(0) toRem(0) toRem(0) toRem(125);
+    // }
 
-    @media (max-width: $md1) {
-      margin: toRem(0) toRem(0) toRem(0) toRem(60);
+    // @media (max-width: $md1) {
+    //   margin: toRem(0) toRem(0) toRem(0) toRem(60);
 
-    }
+    // }
 
-    @media (max-width: $md2) {
-      margin: toRem(0) toRem(0) toRem(0) toRem(90);
-    }
+    // @media (max-width: $md2) {
+    //   margin: toRem(0) toRem(0) toRem(0) toRem(90);
+    // }
 
-    @media (max-width: $md3) {
-      flex: 0 1 auto;
-      margin: 0;
-    }
+    // @media (max-width: $md3) {
+    //   flex: 0 1 auto;
+    //   margin: 0;
+    // }
 
     // .header__discuss-link
     &-link {
-      @extend .link-underline;
+      @extend .link;
     }
   }
 
   // .header__time
   &__time {
-    @media (max-width: $md0) {
-      margin: toRem(0) toRem(101) toRem(0) toRem(0);
-    }
-
-    @media (max-width: $md1) {
-      display: none;
-    }
+    flex: 1 1 auto;
+    // @include adaptiveValue("margin-right", 447, 183, $containerWidth, $laptop, 1);
   }
 
   // .header__nav
@@ -112,14 +178,16 @@
       }
 
       a {
-        &:not(.router-link-active) {
-          @media (any-hover: hover) {
-            transition: opacity 0.3s ease 0s;
-            &:hover {
-              opacity: 0.24;
-            }
-          }
-        }
+        @extend .link;
+        // &:not(.router-link-active) {
+        //   @media (any-hover: hover) {
+        //     transition: opacity 0.3s ease 0s;
+
+        //     &:hover {
+        //       opacity: 0.24;
+        //     }
+        //   }
+        // }
       }
 
       .router-link-active {
