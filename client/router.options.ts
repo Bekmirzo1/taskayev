@@ -38,6 +38,15 @@ export default {
       component: () =>
         import("@/pages/contact.vue").then((r) => r.default || r),
     },
+    {
+      name: "edit-main",
+      path: PAGE_ROUTES.edit,
+      
+      component: () =>
+        import("@/views/EditPage/ui/EditPage.vue").then((r) => r.default || r),
+      // component: () => AboutPage.then((r: typeof AboutPage) => r.default || r),
+      // component: () => import("@/pages/about.vue").then((r) => r.default || r),
+    },
   ],
   // scrollBehavior() {
   //   // always scroll to top

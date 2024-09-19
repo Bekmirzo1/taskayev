@@ -1,0 +1,171 @@
+<script setup lang="ts">
+import {
+  useEditor,
+  EditorContent,
+  Extension,
+  Mark,
+  mergeAttributes,
+} from "@tiptap/vue-3";
+import StarterKit from "@tiptap/starter-kit";
+const contentVal = ref(
+  "Дизайн сайтов, <span class=\"blocked\"> dsadsa</span> интерфейсов, приложений. <br> Для тех, кому нужно лучшее. <br> Делаю ваших клиентов счастливее.",
+);
+
+const CustomExtension = Mark.create({
+  name: "nowrap",
+  addOptions() {
+    return {
+      HTMLAttributes: { class: "nowrap" },
+    };
+  },
+  parseHTML() {
+    return [
+      {
+        tag: "span",
+      },
+    ];
+  },
+  renderHTML({ HTMLAttributes }) {
+    return [
+      "span",
+      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
+      0,
+    ];
+  },
+  // addCommands() {
+  //   return {
+  //     setWrap:
+  //       () =>
+  //       ({ commands }) => {
+  //         return commands.setMark(this.name);
+  //       },
+  //     toggleUnWrap:
+  //       () =>
+  //       ({ commands }) => {
+  //         return commands.toggleMark(this.name);
+  //       },
+  //     unsetWrap:
+  //       () =>
+  //       ({ commands }) => {
+  //         return commands.unsetMark(this.name);
+  //       },
+  //   };
+  // },
+});
+const CustomExtension2 = Mark.create({
+  name: "blocked",
+  addOptions() {
+    return {
+      HTMLAttributes: { class: "blocked" },
+    };
+  },
+  parseHTML() {
+    return [
+      {
+        tag: "span",
+      },
+    ];
+  },
+  renderHTML({ HTMLAttributes }) {
+    return [
+      "span",
+      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
+      0,
+    ];
+  },
+  // addCommands() {
+  //   return {
+  //     setWrap:
+  //       () =>
+  //       ({ commands }) => {
+  //         return commands.setMark(this.name);
+  //       },
+  //     toggleUnWrap:
+  //       () =>
+  //       ({ commands }) => {
+  //         return commands.toggleMark(this.name);
+  //       },
+  //     unsetWrap:
+  //       () =>
+  //       ({ commands }) => {
+  //         return commands.unsetMark(this.name);
+  //       },
+  //   };
+  // },
+});
+const editor = useEditor({
+  content: contentVal.value,
+  // content: `<span class="dsda">dasds</span>`,
+  extensions: [StarterKit, CustomExtension, CustomExtension2],
+  editorProps: {
+    attributes: {
+      class: "myeditor",
+    },
+  },
+  onUpdate() {
+    contentVal.value = editor.value.getHTML();
+  },
+});
+onBeforeUnmount(() => {
+  editor.value.destroy();
+});
+</script>
+<template>
+  <div class="editor-page">
+    <div>{{ contentVal }}</div>
+    <div class="editor-page__container">
+      <div v-if="editor" class="buttons">
+        <button
+          class="btn"
+          :disabled="!editor.can().chain().focus().toggleBold().run()"
+          :class="{ 'is-active': editor.isActive('bold') }"
+          @click="editor.chain().focus().toggleBold().run()">
+          Bold
+        </button>
+        <button
+          class="btn"
+          :disabled="!editor.can().chain().focus().toggleMark('nowrap').run()"
+          :class="{ 'is-active': editor.isActive('nowrap') }"
+          @click="editor.chain().focus().toggleMark('nowrap').run()">
+          Nowrap
+        </button>
+        <button
+          class="btn"
+          :disabled="!editor.can().chain().focus().toggleMark('blocked').run()"
+          :class="{ 'is-active': editor.isActive('blocked') }"
+          @click="editor.chain().focus().toggleMark('blocked').run()">
+          blocked
+        </button>
+      </div>
+      <editor-content :editor="editor" />
+    </div>
+  </div>
+</template>
+<style lang="scss" scoped>
+.editor-page {
+  padding: toRem(200) toRem(0);
+  &:deep(.myeditor) {
+    outline: none;
+    min-height: 50vh;
+    padding: toRem(12) toRem(20);
+    background-color: #d3d3d3;
+    .nowrap {
+      background-color: #c9bfbf;
+    }
+  }
+}
+
+.buttons {
+  margin: toRem(0) toRem(0) toRem(20) toRem(0);
+}
+.blocked {
+  display: block;
+}
+.btn {
+  padding: toRem(10) toRem(15);
+  background-color: $blueColor;
+  &.is-active {
+    background: rgb(60, 60, 207);
+  }
+}
+</style>

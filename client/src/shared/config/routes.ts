@@ -4,5 +4,6 @@ export const PAGE_ROUTES = {
   work: "/work",
   service: "/service",
   contact: "/contact",
+  edit: "/edit"
   
 } as const;

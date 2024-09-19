@@ -1,5 +1,5 @@
+import { PAGE_ROUTES } from "./src/shared/config/";
 import { createResolver } from "@nuxt/kit";
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const development: boolean = process.env.NODE_ENV !== "production";
 export default defineNuxtConfig({
@@ -37,6 +37,11 @@ export default defineNuxtConfig({
         optional: true,
       });
     },
+  },
+  routeRules: {
+    [`${PAGE_ROUTES.edit}/**`]: {
+      ssr: false
+    }
   },
   // components: {
   //   global: true,
