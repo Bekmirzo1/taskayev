@@ -1,7 +1,6 @@
 import mysql2 from "mysql2";
 import { Sequelize } from "sequelize";
 
-console.log(process.env.MY_DB_HOST);
 
 export default new Sequelize(
   process.env.MY_DB_NAME, // Название БД

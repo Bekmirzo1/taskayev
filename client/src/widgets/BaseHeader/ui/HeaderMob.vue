@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { PageRouteStore } from "@/shared/store";
 import { MenuStore, pageLinks } from "../model";
 import HeaderMobBody from "./components/HeaderMobBody.vue";
 import MenuMain from "./MenuMain.vue";
 const header2Top = useTemplateRef("header-top");
 const headerFixed = ref(false);
-const route = useRoute();
-
+const pageRouteStore = PageRouteStore();
 const options = {
   rootMargin: "0px 0px 0px 0px",
   threshold: 0,
@@ -35,9 +35,17 @@ function openMenu() {
   <div ref="header-top" class="header2-minni"></div>
   <div class="header2" :class="{ 'scroll': headerFixed }">
     <div class="header2__container">
+      <!-- :active-value="
+          pageLinks.find((item) => item.link == route.path)?.name as string
+        " -->
+      <!-- :active-value="
+          pageLinks.find((item) => item.link == pageRouteStore.page)?.name as string
+        " -->
+      <!-- active-value="dda" -->
       <HeaderMobBody
         :active-value="
-          pageLinks.find((item) => item.link == route.path)?.name as string
+          pageLinks.find((item) => item.link == pageRouteStore.page)
+            ?.name as string
         "
         button-value="Меню"
         class="header2__body"
@@ -47,9 +55,8 @@ function openMenu() {
   <MenuMain />
 </template>
 <style lang="scss" scoped>
-.header2-minni{
+.header2-minni {
   margin: var(--menu-mob-from-top) toRem(0) toRem(0) toRem(0);
-
 }
 .header2 {
   position: sticky;

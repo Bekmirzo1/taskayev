@@ -9,6 +9,9 @@ declare global {
       MY_DB_PASSWORD: string;
       MY_DB_HOST: string;
       MY_SECRET_KEY: string;
+      MY_STATIC_FILES: string;
+      MY_ROLE_USER: string;
+      MY_ROLE_ADMIN: string;
     }
   }
 }

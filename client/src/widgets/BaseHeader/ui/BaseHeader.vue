@@ -5,14 +5,20 @@ import { CurrentTime } from "@/shared/UI/CurrentTime/";
 import { MediaStore } from "@/shared/libs/media";
 import { MenuStore, pageLinks } from "../model/";
 import LinkBegin from "./components/LinkBegin.vue";
-const route = useRoute();
+import { PageRouteStore } from "@/shared/store";
+// const route = useRoute();
+const pageRouteStore = PageRouteStore();
 const router = useRouter();
 const mediaStore = MediaStore();
 const menuStore = MenuStore();
 const headerBig = ref(false);
-if (route.meta.header == "main") {
+if (pageRouteStore.meta.header == "main") {
   headerBig.value = true;
 }
+// if (route.meta.header == "main") {
+//   headerBig.value = true;
+// }
+
 router.afterEach((to) => {
   if (to.meta.header == "main") {
     headerBig.value = true;
@@ -24,7 +30,7 @@ router.afterEach((to) => {
 });
 watch(
   () => mediaStore.checkMedia("mob"),
-  (newVal) => {    
+  (newVal) => {
     if (newVal == false && menuStore.opened) {
       menuStore.immediateClose();
     }

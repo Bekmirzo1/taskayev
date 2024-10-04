@@ -6,7 +6,7 @@
     </router-link>
   </div>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 .logo {
   &__inner {
    display: inline-block;

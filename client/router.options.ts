@@ -47,6 +47,14 @@ export default {
       // component: () => AboutPage.then((r: typeof AboutPage) => r.default || r),
       // component: () => import("@/pages/about.vue").then((r) => r.default || r),
     },
+    {
+      name: "login",
+      path: PAGE_ROUTES.login,
+      component: () =>
+        import("@/views/LoginPage/ui/LoginPage.vue").then((r) => r.default || r),
+      // component: () => AboutPage.then((r: typeof AboutPage) => r.default || r),
+      // component: () => import("@/pages/about.vue").then((r) => r.default || r),
+    },
   ],
   // scrollBehavior() {
   //   // always scroll to top

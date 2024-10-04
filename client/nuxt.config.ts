@@ -16,7 +16,8 @@ export default defineNuxtConfig({
     transpile: ["gsap"], // https://nuxt.com/docs/api/nuxt-config#transpile
   },
   // pages: false,
-  components: false,
+  plugins: [{ src: "@/shared/plugins/hello", mode: "client" }],
+  // components: false,
   typescript: {
     tsConfig: {
       compilerOptions: {
@@ -26,6 +27,11 @@ export default defineNuxtConfig({
         },
       },
     },
+  },
+  imports: {
+    dirs: [
+      'shared/composables'
+    ]
   },
   hooks: {
     // https://nuxt.com/docs/guide/recipes/custom-routing#using-approuteroptions
@@ -40,19 +46,19 @@ export default defineNuxtConfig({
   },
   routeRules: {
     [`${PAGE_ROUTES.edit}/**`]: {
-      ssr: false
-    }
+      ssr: false,
+    },
   },
-  // components: {
-  //   global: true,
-  //   dirs: [
-  //     {
-  //       path: "@/shared/UI",
-  //       pathPrefix: false,
-  //       extensions: [".vue"],
-  //     },
-  //   ],
-  // },
+  components: {
+    global: true,
+    dirs: [
+      {
+        path: "@/shared/components/",
+        pathPrefix: false,
+        extensions: [".vue"],
+      },
+    ],
+  },
   // dir: {
   //   assets: "app/scss/",
   // },
@@ -61,11 +67,19 @@ export default defineNuxtConfig({
   //     brotli: !development,
   //   },
   // },
+  // css: ['@/app/scss/style.scss'],
   vite: {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: ' @import "src/app/scss/style.scss";',
+          api: 'modern-compiler',
+          additionalData: '@use "@/app/scss/style.scss" as *;'
+          // imports: [{
+
+          //   'src/app/scss/style.scss'
+          // }
+          // ]
+          // additionalData: '@import "src/app/scss/style";',
         },
       },
     },

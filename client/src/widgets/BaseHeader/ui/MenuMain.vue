@@ -16,8 +16,8 @@ router.beforeEach((to, from, next) => {
   if (menuStore.opened) {
     // menuStore.menuOpen(false);
     menuStore.immediateClose();
-    next();
   }
+  next();
 });
 
 </script>

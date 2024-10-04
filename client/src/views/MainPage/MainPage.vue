@@ -1,12 +1,42 @@
 <script setup lang="ts">
+import { InfoService } from "@/shared/api";
+import type { InfoDto } from "@/shared/api/dto/info";
 import { MediaStore } from "@/shared/libs/media";
+import { LoadStore } from "@/shared/store";
 import { CurrentTime } from "@/shared/UI/CurrentTime/";
 import { LinkBegin } from "@/widgets/BaseHeader";
 const mediaStore = MediaStore();
-
+const { $apiAuth2, $axiosHost, $axiosAuthHost, $locally } = useNuxtApp();
+const loadState = LoadStore();
 useHead({
   title: "Main",
 });
+// console.log($apiAuth2);
+
+async function loadInfo() {
+  /* const data = await InfoService.showInfo2();
+  // return data;
+  console.log(data); */
+  /* const { data } = await useAsyncData("index", () =>
+    $apiAuth2<InfoDto>("api/info", { method: "GET" }),
+  );
+  console.log(data.value); */
+  const { data } = await $axiosAuthHost.get<InfoDto>("api/info");
+  $locally.setItem("token", `Number - ${Math.random()}`);
+  console.log(data);
+}
+watch(
+  () => loadState.loaded,
+  (newVal) => {
+    console.log(newVal);
+    if (newVal) {
+      loadInfo();
+    }
+  },
+);
+if (loadState.loaded) {
+  loadInfo();
+}
 </script>
 <template>
   <div class="main">
@@ -17,7 +47,7 @@ useHead({
           <span class="fullscreen__item">
             <span class="fullscreen__item-text">Fresh,</span>
           </span>
-          
+
           <span class="fullscreen__item">
             <span class="fullscreen__item-text">Light,</span>
           </span>

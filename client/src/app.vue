@@ -135,7 +135,9 @@ if (productionMode) {
       );
   }
 } else {
-  loadState.loadApp();
+  onMounted(() => {
+    loadState.loadApp();
+  });
   loadState.fullLoad();
 }
 </script>
@@ -177,6 +179,7 @@ if (productionMode) {
 </template>
 
 <style lang="scss">
+// @use './app/scss/style';
 html.custom-cursor,
 .custom-cursor body {
   cursor: none;
@@ -186,6 +189,9 @@ html.custom-cursor,
   }
 }
 
+.page {
+  padding: toRem($headerHeight) toRem(0) toRem(0) toRem(0);
+}
 .cover-full {
   position: absolute;
   width: 100%;

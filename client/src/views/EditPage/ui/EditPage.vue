@@ -15,7 +15,9 @@ import { Ckeditor } from "@ckeditor/ckeditor5-vue";
 import "ckeditor5/ckeditor5.css";
 
 const editor = ref(ClassicEditor);
-const editorData = ref("<p>Hello <span class=\"nowrap\"> CKEditor 5</span> in Vue!</p>");
+const editorData = ref(
+  `Дизайн сайтов, интерфейсов, приложений.<br />Для тех, кому нужно лучшее.<br />Делаю ваших клиентов счастливее.`,
+);
 const editorConfig = {
   plugins: [
     GeneralHtmlSupport,
@@ -43,20 +45,78 @@ const editorConfig = {
     ],
   },
 };
+const items = ref(["fresh", "light", "aesthetic"]);
+function addItem() {
+  items.value.push("");
+}
+function removeItem(index: number) {
+  items.value.splice(index, 1);
+}
+const file = ref() as Ref<File>;
+function selectFile(e: Event) {
+  const fileInput = e.target as HTMLInputElement;
+  file.value = fileInput.files[0];
+}
+const fileUrl = computed(() => {
+  return file.value
+    ? URL.createObjectURL(file.value)
+    : "https://fps.cdnpk.net/images/home/subhome-ai.webp?w=649&h=649";
+});
 </script>
 <template>
   <div class="editor-page">
     <div class="editor-page__container">
-      <ckeditor v-model="editorData" :editor="editor" :config="editorConfig" />
+      <div class="editor-page__items">
+        <div class="editor-page__item">
+          <input
+            type="file"
+            class="input"
+            accept="image/png, image/jpeg"
+            @change="selectFile" />
+          <div class="loading-file">
+            <div class="loading-file__inner">
+              <img :src="fileUrl" alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="editor-page__item">
+          <div class="items">
+            <div v-for="(item, index) in items" :key="index" class="item">
+              <input v-model="items[index]" type="text" class="input" />
+              <button type="button" class="btn" @click="removeItem(index)">
+                remove
+              </button>
+            </div>
+          </div>
+          <button type="button" class="btn" @click="addItem">Add</button>
+        </div>
+        <div class="editor-page__item">
+          <!-- {{ editorData }} -->
+          <ckeditor
+            v-model="editorData"
+            :editor="editor"
+            :config="editorConfig" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
 .editor-page {
   padding: toRem(200) toRem(0);
-  &:deep(.nowrap){
+  &:deep(.nowrap) {
     background: #eeeeee;
   }
+  // .editor-page__items
+  &__items {
+  }
+  // .editor-page__item
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: toRem(30);
+    }
+  }
+
   // &:deep(.myeditor) {
   //   outline: none;
   //   min-height: 50vh;
@@ -66,5 +126,31 @@ const editorConfig = {
   //     background-color: #c9bfbf;
   //   }
   // }
+}
+.loading-file {
+  width: toRem(114);
+  &__inner {
+    @extend .ibg;
+    padding-bottom: percent(157, 114);
+  }
+}
+.item {
+  display: flex;
+  gap: toRem(20);
+  &:not(:last-child) {
+    margin-bottom: toRem(20);
+  }
+}
+.input {
+  &[type="text"],
+  &[type="email"] {
+    border: toRem(1) solid $mainColor;
+    padding-left: toRem(12);
+    text-transform: capitalize;
+  }
+}
+.btn {
+  padding: toRem(10) toRem(12);
+  background-color: $blueColor;
 }
 </style>

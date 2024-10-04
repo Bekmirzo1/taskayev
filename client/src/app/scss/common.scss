@@ -57,7 +57,7 @@
 
 @mixin text () {
   font-size: toRem(18);
-  letter-spacing: $letterSpacing;
+  // letter-spacing: $letterSpacing;
   line-height: percent(17, 18);
   font-weight: 700;
   -webkit-text-stroke: toRem(0.4) currentColor;
@@ -66,7 +66,7 @@
 @mixin text2 () {
   font-size: toRem(15);
   line-height: percent(14, 15);
-  letter-spacing: -0.03em;
+  // letter-spacing: -0.03em;
   -webkit-text-stroke: toRem(0.3) currentColor;
 }
 

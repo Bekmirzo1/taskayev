@@ -10,7 +10,7 @@ export const MenuStore = defineStore("menu", () => {
     }
     if (open == false) {
       pageLockStore.unLockPage();
-    } else{
+    } else {
       pageLockStore.lockPage();
     }
     opened.value = open;
