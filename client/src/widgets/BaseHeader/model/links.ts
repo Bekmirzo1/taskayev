@@ -10,6 +10,7 @@ export const pageLinks: LinkObj[] = [
   { link: PAGE_ROUTES.work, name: "Работы" },
   { link: PAGE_ROUTES.service, name: "Услуги" },
   { link: PAGE_ROUTES.contact, name: "Контакты" },
+  // { link: PAGE_ROUTES.edit, name: "Edit" },
 ];
 export const socialLinks: LinkObj[] = [
   { link: SOCIAL_LINKS.email, name: "Email" },

@@ -41,7 +41,9 @@ export default {
     {
       name: "edit-main",
       path: PAGE_ROUTES.edit,
-      
+      meta: {
+        authed: true,
+      },
       component: () =>
         import("@/views/EditPage/ui/EditPage.vue").then((r) => r.default || r),
       // component: () => AboutPage.then((r: typeof AboutPage) => r.default || r),
@@ -51,7 +53,9 @@ export default {
       name: "login",
       path: PAGE_ROUTES.login,
       component: () =>
-        import("@/views/LoginPage/ui/LoginPage.vue").then((r) => r.default || r),
+        import("@/views/LoginPage/ui/LoginPage.vue").then(
+          (r) => r.default || r,
+        ),
       // component: () => AboutPage.then((r: typeof AboutPage) => r.default || r),
       // component: () => import("@/pages/about.vue").then((r) => r.default || r),
     },

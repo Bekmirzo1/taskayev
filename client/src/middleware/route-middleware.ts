@@ -1,8 +1,9 @@
 import { PageRouteStore } from "@/shared/store"
 
 export default defineNuxtRouteMiddleware((to) => {
-  const pageRouteStore = PageRouteStore();
+  const pageRouteStore = PageRouteStore();  
   if (to.path) {
+    // console.log('dasds');
     pageRouteStore.pageTo(to.path)
     pageRouteStore.changeMeta(to.meta)
   }

@@ -14,6 +14,7 @@ export default (role: string) => {
       if (!token) {
         return next(ApiError.UnauthorizedError());
       }
+      
       const usersData = verify(token, process.env.MY_SECRET_KEY) as UserDto;
       if (!usersData) {
         return next(ApiError.UnauthorizedError());

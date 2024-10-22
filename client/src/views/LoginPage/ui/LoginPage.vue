@@ -1,52 +1,13 @@
 <script setup lang="ts">
-interface InputType {
-  input: string;
-  checkType?: "email" | "password";
-  correct?: boolean;
-  required?: boolean;
-}
-interface InputTypes {
-  [key: string]: InputType;
-}
-const inputs = ref({
-  inputEmail: {
-    input: "www@www.com",
-    checkType: "email",
-    correct: false,
-    required: true,
-  },
-  inputPassword: {
-    input: "dilzoda10",
-    checkType: "password",
-    correct: false,
-    required: true,
-  },
-} as InputTypes);
-
-function emailTest(formRequiredItem: string) {
-  return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,8})+$/.test(formRequiredItem);
-}
-function passwordTest(formRequiredItem: string) {
-  return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(formRequiredItem);
-}
-function validateInput(input: InputType) {
-  if (input.input == "") {
-    input.correct = input.input === "" ? false : true;
-  } else {
-    if (!input.checkType) {
-      input.correct = input.input.trim() === "" ? false : true;
-      // input.correct = true;
-    }
-    if (input.checkType == "email") {
-      input.correct = emailTest(input.input);
-    }
-    if (input.checkType == "password") {
-      input.correct = passwordTest(input.input);
-    }
-  }
-  return input.correct;
-}
-function loginSubmit() {
+import { $authHostAxios, AuthService, type AuthDto } from "@/shared/api";
+import { inputs, validateInput } from "../model";
+import { AuthStore } from "@/shared/store/";
+import errorResponse from "@/shared/api/errors/errorResponse";
+const authStore = AuthStore();
+useHead({
+  title: "Login",
+});
+async function loginSubmit() {
   let errors = 0;
   for (const key in inputs.value) {
     if (Object.hasOwnProperty.call(inputs.value, key)) {
@@ -60,7 +21,34 @@ function loginSubmit() {
     }
   }
   if (errors === 0) {
-    console.log("great");
+    // authStore.check()
+    // try {
+    //  await authStore.login(inputs.value.inputEmail.input, "1234");
+    // setTimeout(() => {
+    //   authStore.logout();
+    //   console.log(authStore.isAuth);
+    // }, 300);
+    // } catch (error) {
+    //   errorResponse(error)
+    //   // console.log(error);
+    // }
+    if (!authStore.isAuth) {
+      try {
+        const res = await AuthService.login(
+          inputs.value.inputEmail.input,
+          "12345",
+        );
+        /* const res = await $hostAuth<AuthDto>("/check", {
+        method: "GET",
+      }); */
+        authStore.login(res);
+        const tokenCookie = useCookie("token", { watch: "shallow" });
+        tokenCookie.value = res.token;
+        console.log(res);
+      } catch (error) {
+        errorResponse(error);
+      }
+    }
   } else {
     console.log("errors here");
   }
@@ -72,10 +60,7 @@ function loginSubmit() {
       <div class="login-page__container">
         <div class="login-page__body">
           <h1 class="login-page__title">Логин</h1>
-          <form
-            action=""
-            class="login-page__form form"
-            @submit.prevent="loginSubmit">
+          <form class="login-page__form form" @submit.prevent="loginSubmit">
             <div class="form__rows">
               <div class="form__input">
                 <v-input

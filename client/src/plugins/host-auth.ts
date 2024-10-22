@@ -1,14 +1,37 @@
 export default defineNuxtPlugin({
-  // name: "nuxtdsad",
+  name: "nuxtdsad",
   // dependsOn: ["nuxt:revive-payload:client"],
   async setup() {
-    const apiAuth2 = $fetch.create({
+    const hostAuth = $fetch.create({
       baseURL: import.meta.env.VITE_APP_API_URL,
       /* headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        // Authorization: `Bearer ${useCookie("token").value}`,
+        // Authorization: `Bearer ${Math.floor(Math.random() * 10)}`,
       }, */
       // headers: await useRequestHeaders(['authorization']),
       async onRequest({ options }) {
+        const token = useCookie("token");
+        if (token?.value) {
+          /* console.log("[fetch request] Authorization header created");
+          options.headers = options.headers || {};
+          options.headers.Authorization = `Bearer ${token.value}`;
+          console.log(options.headers.Authorization); */
+    
+          const headers = new Headers(options.headers);
+          // headers.set("Authorization", `Bearer ${Math.floor(Math.random() * 10)}`);
+          headers.set("Authorization", `Bearer ${token.value}`);
+
+          options.headers = headers;
+        }
+        // const token = useCookie("token");
+        // options.headers = options.headers || ({} as Record<string, string>);
+        // if (token?.value) {
+        // console.log("[fetch request] Authorization header created");
+        // options.headers.Authorization = `Bearer ${token.value}`;
+        // } else {
+        //   options.headers.Authorization = `Bearer ${Math.floor(Math.random() * 10)}`;
+        // // }
+        // console.log(options.headers.Authorization);
         /* const headers = (options.headers ||= {}) as Record<string, string> ;
         headers.Authorization = `Bearer ${localStorage.getItem("token")}`; */
 
@@ -22,7 +45,7 @@ export default defineNuxtPlugin({
           headers.Authorization = `Bearer newOne`;
         }
         console.log(options.headers.Authorization); */
-        const token = localStorage.getItem("token") || "someVal";
+        /* const token = localStorage.getItem("token") || "someVal";
         const headers = options?.headers
           ? new Headers(options.headers)
           : new Headers();
@@ -33,7 +56,7 @@ export default defineNuxtPlugin({
           ? new Headers(options.headers)
           : new Headers();
         console.log(headers.get("Authorization"));
-        console.log(headers2.get("Authorization"));
+        console.log(headers2.get("Authorization")); */
       },
     });
     // // nuxtApp.hook("app:mounted", () => {
@@ -41,7 +64,7 @@ export default defineNuxtPlugin({
     // // });
     return {
       provide: {
-        apiAuth2,
+        hostAuth,
       },
     };
   },

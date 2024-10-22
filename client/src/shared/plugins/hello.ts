@@ -7,7 +7,8 @@ export default defineNuxtPlugin(() => {
     //   Authorization: `Bearer ${localStorage.getItem("token")}`,
     // },
     async onRequest({ options }) {
-      console.log(options.headers);
+      /* options.headers = options.headers || {};
+        options.headers.Authorization = `Bearer ${token.value}`; */
       // const headers = options?.headers ? new Headers(options.headers) : new Headers();
       // if (!headers.has('Authorization')) {
       //   // headers.set("Authorization", `Bearer ${authToken}`);

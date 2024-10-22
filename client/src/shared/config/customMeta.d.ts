@@ -1,7 +1,8 @@
-declare module '#app' {
+declare module "#app" {
   interface PageMeta {
-    header?: 'main' | 'another'
+    header?: "main" | "another";
+    authed?: boolean;
   }
 }
 
-export {}
+export {};

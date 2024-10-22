@@ -134,6 +134,7 @@
     // .fullscreen__item-text
     &-text {
       @extend .title2;
+      text-transform: capitalize;
     }
 
     // .fullscreen__item-image

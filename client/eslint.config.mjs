@@ -23,6 +23,7 @@ export default withNuxt(
         //   // patterns: ["[@~]/"],
         // },
       ],
+      "vue/no-v-html": "off",
       // "@typescript-eslint/no-unused-vars": "off",
     },
   },

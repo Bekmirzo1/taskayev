@@ -45,7 +45,7 @@ class UserController {
         return next(ApiError.badRequest("Неверный пароль"));
       }
       const token = tokenService.generateTokens({ id: user.id, email, role: user.role });
-      res.json(token);
+      res.json({...token, user});
     } catch (error) {
       return next(ApiError.badRequest(error.message));
     }
@@ -53,7 +53,7 @@ class UserController {
   async check(req: ReqWithUser, res: Response, next: NextFunction) {
     try {
       const token = tokenService.generateTokens({ id: req.user.id, email: req.user.email, role: req.user.role });
-      res.json(token);
+      res.json({...token, user: req.user});
     } catch (error) {
       return next(ApiError.badRequest(error.message));
     }

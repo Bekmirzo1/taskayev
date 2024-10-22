@@ -4,8 +4,9 @@ import gsap from "gsap";
 import { PreloadElem } from "./app/Preload";
 import { MediaStore } from "./shared/libs/media";
 import { CustomMouse2 } from "./shared/UI/CustomMouse";
-import { productionMode } from "@/shared/config/";
-import { LoadStore, PageLockStore } from "./shared/store";
+import { PAGE_ROUTES, productionMode } from "@/shared/config/";
+import { AuthStore, LoadStore, PageLockStore } from "./shared/store";
+import type { AuthDto } from "./shared/api";
 
 gsap.registerEase("easeOutCubic", function (progress) {
   return 1 - Math.pow(1 - progress, 3);
@@ -13,7 +14,7 @@ gsap.registerEase("easeOutCubic", function (progress) {
 gsap.registerEase("easeInQuad", function (progress) {
   return 1 - (1 - progress) * (1 - progress);
 });
-
+const authStore = AuthStore();
 const { isDesktop } = useDevice();
 const router = useRouter();
 const loadState = LoadStore();
@@ -139,6 +140,21 @@ if (productionMode) {
     loadState.loadApp();
   });
   loadState.fullLoad();
+}
+
+try {
+  const user = await useAuthAPI<AuthDto>("/check", { method: "GET" });
+  if (user.data.value) {
+    authStore.login(user.data.value);
+    const tokenCookie = await useCookie("token", { watch: "shallow" });
+    console.log(tokenCookie.value);
+    tokenCookie.value = user.data.value.token;
+  }
+} catch (error) {
+  console.log(error);
+  // if (error instanceof Error) {
+  //   console.log(error);
+  // }
 }
 </script>
 <template>

@@ -11,7 +11,7 @@ router.post('/info', infoController.changeInfo)
 router.get('/info', infoController.showInfo)
 router.post('/login', userController.login)
 router.post('/registration', userController.registraiton)
-router.post('/auth', authMiddlware(process.env.MY_ROLE_ADMIN), userController.check)
+router.get('/check', authMiddlware(process.env.MY_ROLE_ADMIN), userController.check)
 router.post('/users', authMiddlware(process.env.MY_ROLE_ADMIN), userController.getAll)
 
 export default router;

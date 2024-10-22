@@ -10,13 +10,13 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: false },
   srcDir: "src/",
-  modules: ["@nuxt/eslint", "@pinia/nuxt", "@nuxtjs/device"],
+  modules: ["@nuxt/eslint", "@nuxtjs/device", "@pinia/nuxt",],
   build: {
     // Без этого (transpile: ["gsap"]) проект c gsap не генерится в production
     transpile: ["gsap"], // https://nuxt.com/docs/api/nuxt-config#transpile
   },
   // pages: false,
-  plugins: [{ src: "@/shared/plugins/hello", mode: "client" }],
+  // plugins: [{ src: "@/shared/plugins/hello", mode: "client" }],
   // components: false,
   typescript: {
     tsConfig: {

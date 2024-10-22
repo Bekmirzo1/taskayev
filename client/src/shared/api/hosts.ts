@@ -1,9 +1,21 @@
-// import axios from "axios";
+import axios, { type InternalAxiosRequestConfig } from "axios";
 
-const $host = $fetch.create({
+/* const $host = $fetch.create({
+  baseURL: import.meta.env.VITE_APP_API_URL,
+}); */
+const $hostAxios = axios.create({
   baseURL: import.meta.env.VITE_APP_API_URL,
 });
-const $authHost = $fetch.create({
+const $authHostAxios = axios.create({
+  baseURL: import.meta.env.VITE_APP_API_URL,
+});
+const authInterCeptor = (config: InternalAxiosRequestConfig) => {
+  config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+  console.log(`config.headers.Authorization - ${config.headers.Authorization}`);
+  return config;
+};
+$authHostAxios.interceptors.request.use(authInterCeptor);
+/* const $authHost = $fetch.create({
   baseURL: import.meta.env.VITE_APP_API_URL,
   // headers: {
   //   Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -20,6 +32,6 @@ const $authHost = $fetch.create({
   // onResponse(){
   //   localStorage.setItem('token', 'Bearer')
   // }
-});
+}); */
 
-export { $host, $authHost };
+export { $hostAxios, $authHostAxios };

@@ -1,42 +1,15 @@
 <script setup lang="ts">
-import { InfoService } from "@/shared/api";
-import type { InfoDto } from "@/shared/api/dto/info";
+import type { InfoDto } from "@/shared/api";
+import { PAGE_ROUTES } from "@/shared/config";
 import { MediaStore } from "@/shared/libs/media";
-import { LoadStore } from "@/shared/store";
-import { CurrentTime } from "@/shared/UI/CurrentTime/";
 import { LinkBegin } from "@/widgets/BaseHeader";
+import { LinkToEdit } from "@/shared/UI/LinkToEdit";
 const mediaStore = MediaStore();
-const { $apiAuth2, $axiosHost, $axiosAuthHost, $locally } = useNuxtApp();
-const loadState = LoadStore();
 useHead({
   title: "Main",
 });
-// console.log($apiAuth2);
-
-async function loadInfo() {
-  /* const data = await InfoService.showInfo2();
-  // return data;
-  console.log(data); */
-  /* const { data } = await useAsyncData("index", () =>
-    $apiAuth2<InfoDto>("api/info", { method: "GET" }),
-  );
-  console.log(data.value); */
-  const { data } = await $axiosAuthHost.get<InfoDto>("api/info");
-  $locally.setItem("token", `Number - ${Math.random()}`);
-  console.log(data);
-}
-watch(
-  () => loadState.loaded,
-  (newVal) => {
-    console.log(newVal);
-    if (newVal) {
-      loadInfo();
-    }
-  },
-);
-if (loadState.loaded) {
-  loadInfo();
-}
+const { data } = await useAPI<InfoDto>("/info", { method: "GET" });
+const imageLink = import.meta.env.VITE_APP_API_HOST + data.value.image;
 </script>
 <template>
   <div class="main">
@@ -44,8 +17,17 @@ if (loadState.loaded) {
       <!-- fullscreen__center -->
       <div class="fullscreen__center">
         <div class="fullscreen__items">
+          <span
+            v-for="(item, index) in data.items.split(', ')"
+            :key="index"
+            class="fullscreen__item">
+            <span class="fullscreen__item-text">{{ item }}</span>
+          </span>
+        </div>
+        <!-- <div class="fullscreen__items">
           <span class="fullscreen__item">
             <span class="fullscreen__item-text">Fresh,</span>
+            <span class="fullscreen__item-text">{{ data.items }}</span>
           </span>
 
           <span class="fullscreen__item">
@@ -54,16 +36,17 @@ if (loadState.loaded) {
           <span class="fullscreen__item">
             <span class="fullscreen__item-text">Aesthetic</span>
           </span>
-        </div>
+        </div> -->
       </div>
       <!-- fullscreen__inter -->
       <div class="fullscreen__inter">
         <div class="fullscreen__inter-text">
-          Дизайн сайтов, интерфейсов, приложений.
+          <div v-html="data.description"></div>
+          <!-- Дизайн сайтов, интерфейсов, приложений.
           <br />
           Для тех, кому нужно лучшее.
           <br />
-          Делаю ваших клиентов счастливее.
+          Делаю ваших клиентов счастливее. -->
         </div>
         <div
           v-if="!mediaStore.checkMedia('mob')"
@@ -103,7 +86,7 @@ if (loadState.loaded) {
       <!-- fullscreen__bottom-image -->
       <div class="fullscreen__bottom-image">
         <div class="fullscreen__bottom-image-body">
-          <img src="@/shared/assets/images/home/main.jpg" alt="" />
+          <img :src="imageLink" alt="main" />
         </div>
       </div>
       <!-- Fullscreen squares -->
@@ -115,6 +98,7 @@ if (loadState.loaded) {
         <CurrentTime />
       </div> -->
     </div>
+    <LinkToEdit :link="PAGE_ROUTES.edit"/>
   </div>
 </template>
 <style lang="scss" scoped>
