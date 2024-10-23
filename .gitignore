@@ -26,3 +26,6 @@ logs
 
 # Source files
 source
+.gitignore
+.env.d.ts
+.environment.d.ts
