@@ -8,8 +8,18 @@ const mediaStore = MediaStore();
 useHead({
   title: "Main",
 });
-const { data } = await useAPI<InfoDto>("/info", { method: "GET" });
-const imageLink = import.meta.env.VITE_APP_API_HOST + data.value.image;
+const data = ref({
+  image: "_nuxt/shared/assets/images/home/main.jpg",
+  // image: "@/shared/assets/images/home/main.jpg",
+  description: "<p>Дизайн сайтов, интерфейсов, приложений.<br>Для тех, кому нужно лучшее.<br>Делаю ваших клиентов счастливее.</p>",
+  items: "fresh, light, aesthetic",
+} as InfoDto);
+const imageLink = data.value.image;
+// const { data } = await useAPI<InfoDto>("/info", { method: "GET" });
+// const imageLink = import.meta.env.VITE_APP_API_HOST + data.value.image;
+// const imageLink = 'https://fps.cdnpk.net/images/home/subhome-ai.webp?w=649&h=649';
+// console.log(data.value);
+
 </script>
 <template>
   <div class="main">
@@ -86,7 +96,9 @@ const imageLink = import.meta.env.VITE_APP_API_HOST + data.value.image;
       <!-- fullscreen__bottom-image -->
       <div class="fullscreen__bottom-image">
         <div class="fullscreen__bottom-image-body">
-          <img :src="imageLink" alt="main" />
+          <!-- <img :src="imageLink" alt="main" /> -->
+          <!-- <img src="@/shared/assets/images/home/main.jpg" alt="main" /> -->
+          <img src="../../shared/assets/images/home/main.jpg" alt="main" />
         </div>
       </div>
       <!-- Fullscreen squares -->
@@ -98,9 +110,9 @@ const imageLink = import.meta.env.VITE_APP_API_HOST + data.value.image;
         <CurrentTime />
       </div> -->
     </div>
-    <LinkToEdit :link="PAGE_ROUTES.edit"/>
+    <LinkToEdit :link="PAGE_ROUTES.edit" />
   </div>
 </template>
 <style lang="scss" scoped>
-@import "style.scss";
+@use "style.scss" as *;
 </style>

@@ -1,10 +1,14 @@
+@use '@/app/scss/abstract' as *;
+
 .header {
 
   width: 100%;
   top: 0;
   left: 0;
   z-index: 99;
-
+  @media (any-hover: hover) {
+    padding: 0px var(--scrollbar-right-active) 0px 0px;
+  }
   &:deep(path) {
     fill: $mainColor;
   }
@@ -88,6 +92,7 @@
     }
 
     @extend .text-link;
+
     @media (max-width: $md3) {
       -webkit-text-stroke: toRem(0.8);
     }
@@ -197,6 +202,6 @@
   }
 }
 
-.header-logout{
+.header-logout {
   margin: toRem(0) toRem(0) toRem(0) toRem(32);
 }

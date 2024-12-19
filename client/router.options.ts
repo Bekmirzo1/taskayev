@@ -36,13 +36,15 @@ export default {
       name: "contact",
       path: PAGE_ROUTES.contact,
       component: () =>
-        import("@/pages/contact.vue").then((r) => r.default || r),
+        // import("@/pages/contact.vue").then((r) => r.default || r),
+      import("@/views/ContactPage/ui/ContactPage.vue").then((r) => r.default || r),
+
     },
     {
       name: "edit-main",
       path: PAGE_ROUTES.edit,
       meta: {
-        authed: true,
+        authorized: true,
       },
       component: () =>
         import("@/views/EditPage/ui/EditPage.vue").then((r) => r.default || r),

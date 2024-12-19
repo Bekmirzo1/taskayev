@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import { $authHostAxios, AuthService, type AuthDto } from "@/shared/api";
-import { inputs, validateInput } from "../model";
+import { AuthService, type AuthDto } from "@/shared/api";
+import { loginInputs } from "../model";
 import { AuthStore } from "@/shared/store/";
 import errorResponse from "@/shared/api/errors/errorResponse";
+import { validateInput } from "@/shared/forms/input";
 const authStore = AuthStore();
 useHead({
   title: "Login",
 });
 async function loginSubmit() {
   let errors = 0;
-  for (const key in inputs.value) {
-    if (Object.hasOwnProperty.call(inputs.value, key)) {
-      const element = inputs.value[key];
+  for (const key in loginInputs.value) {
+    if (Object.hasOwnProperty.call(loginInputs.value, key)) {
+      const element = loginInputs.value[key];
       if (element.required) {
         const isCorrect = validateInput(element);
         if (!isCorrect) {
@@ -21,33 +22,16 @@ async function loginSubmit() {
     }
   }
   if (errors === 0) {
-    // authStore.check()
-    // try {
-    //  await authStore.login(inputs.value.inputEmail.input, "1234");
-    // setTimeout(() => {
-    //   authStore.logout();
-    //   console.log(authStore.isAuth);
-    // }, 300);
-    // } catch (error) {
-    //   errorResponse(error)
-    //   // console.log(error);
-    // }
     if (!authStore.isAuth) {
-      try {
+      // try {
         const res = await AuthService.login(
-          inputs.value.inputEmail.input,
+          loginInputs.value.inputEmail.input,
           "12345",
         );
-        /* const res = await $hostAuth<AuthDto>("/check", {
-        method: "GET",
-      }); */
-        authStore.login(res);
-        const tokenCookie = useCookie("token", { watch: "shallow" });
-        tokenCookie.value = res.token;
         console.log(res);
-      } catch (error) {
-        errorResponse(error);
-      }
+      // } catch (error) {
+      //   errorResponse(error);
+      // }
     }
   } else {
     console.log("errors here");
@@ -64,12 +48,13 @@ async function loginSubmit() {
             <div class="form__rows">
               <div class="form__input">
                 <v-input
-                  v-model="inputs.inputEmail.input"
+                  v-model="loginInputs.inputEmail.input"
+                  type="text"
                   placeholder="Email*" />
               </div>
               <div class="form__input">
                 <v-input
-                  v-model="inputs.inputPassword.input"
+                  v-model="loginInputs.inputPassword.input"
                   type="password"
                   placeholder="Пароль*" />
               </div>
@@ -84,5 +69,5 @@ async function loginSubmit() {
   </div>
 </template>
 <style lang="scss" scoped>
-@import "./styles.scss";
+@use "./styles.scss";
 </style>

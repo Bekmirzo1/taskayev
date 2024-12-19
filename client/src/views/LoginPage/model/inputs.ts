@@ -1,6 +1,6 @@
-import type { InputTypes } from "./InputType";
+import type { InputTypesLogin } from "./InputType";
 
-export const inputs = ref({
+export const loginInputs = ref({
   inputEmail: {
     input: "admin@mail.com",
     checkType: "email",
@@ -13,4 +13,4 @@ export const inputs = ref({
     correct: false,
     required: true,
   },
-} as InputTypes);
+} as InputTypesLogin);

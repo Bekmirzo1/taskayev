@@ -1,0 +1,138 @@
+@use "@/app/scss/abstract" as *;
+
+.footer {
+  padding: toRem(0) toRem(0) toRem(20) toRem(0);
+
+  // .footer__container
+  &__container {}
+
+  // .footer__body
+  &__body {
+    display: flex;
+
+    @media (min-width: $md3) {
+      align-items: flex-start;
+    }
+
+    @media (max-width: $md3) {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  // .footer__rights
+  &__rights {
+    @extend .text;
+    display: flex;
+    margin: toRem(0) toRem(168) toRem(0) toRem(0);
+
+    @media (max-width: $md0) {
+      margin: toRem(0) toRem(280) toRem(0) toRem(0);
+    }
+
+    @media (max-width: $md1) {
+      margin: toRem(0) toRem(200) toRem(0) toRem(0);
+    }
+
+    @media (max-width: $md2) {
+      display: block;
+      margin: toRem(0) toRem(173) toRem(0) toRem(0);
+    }
+
+    @media (max-width: $md3) {
+      order: 2;
+      margin: toRem(0) toRem(0) toRem(20) toRem(0);
+    }
+  }
+
+  // .footer__rights-name
+  &__rights-name {
+    @media (min-width: $md2) {
+      margin: toRem(0) 0.25em toRem(0) toRem(0);
+    }
+  }
+
+  // .footer__rights-reserved
+  &__rights-reserved {
+    @media (max-width: $md2) {
+      display: block;
+    }
+  }
+
+  // .footer__social
+  &__social {
+    @media (min-width: $md3) {
+      flex: 1 1 auto;
+    }
+
+    @media (max-width: $md3) {
+      order: 1;
+      margin: toRem(0) toRem(0) toRem(40) toRem(0);
+    }
+  }
+
+  // .footer__social-links
+  &__social-links {
+    display: flex;
+
+
+
+    li {
+      @extend .text-link;
+
+      &:not(:last-child) {
+        margin: toRem(0) toRem(69) toRem(0) toRem(0);
+
+        .footer__social-link {
+          display: inline-flex;
+
+          &::after {
+            content: ",";
+          }
+        }
+      }
+    }
+  }
+
+  // .footer__social-link
+  &__social-link {
+    @extend .link;
+  }
+
+  // .footer__dev
+  &__dev {
+    @media (max-width: $md3) {
+      order: 3;
+    }
+  }
+
+  // .footer__dev-text
+  &__dev-text {
+    text-transform: uppercase;
+    @extend .text;
+
+    @media (min-width: $md0) {
+      margin: toRem(0) toRem(8) toRem(0) toRem(0);
+    }
+
+    @media (min-width: $md3) {
+      text-align: right;
+    }
+  }
+
+  // .footer__dev-link
+  &__dev-link {
+    @extend .text-link;
+    @extend .link-underline;
+
+    &::after {
+      content: "";
+
+      // width: 99%;
+      @media (min-width: $md0) {
+        width: calc(100% - toRem(8));
+      }
+    }
+  }
+}

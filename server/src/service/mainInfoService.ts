@@ -10,8 +10,6 @@ import fs from 'fs';
 class MainInfoService {
   async changeInfo(userDto: InfoDto, img?: UploadedFile) {
     try {
-      console.log(img);
-
       const fileName = v4() + '.jpg';
       if (img) {
         const filePath = path.resolve(process.env.MY_STATIC_FILES, fileName);
@@ -33,7 +31,9 @@ class MainInfoService {
         items: userDto.items,
       } as InfoDto)
       if (img) {
-        fs.unlinkSync(`${process.env.MY_STATIC_FILES}/${info.image}`)
+        if (fs.existsSync(`${process.env.MY_STATIC_FILES}/${info.image}`)) {
+          fs.unlinkSync(`${process.env.MY_STATIC_FILES}/${info.image}`)
+        }
         info.image = fileName;
         await info.save();
       }

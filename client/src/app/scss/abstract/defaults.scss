@@ -1,0 +1,30 @@
+@use "mixins.scss" as *;
+@use "fonts.scss" as *;
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+$fontFamily: "Anonymous Pro";
+$secondFamily: 'ExposureTrialVAR';
+$thirdFamily: '5by7';
+$fontSize: toRem(18);
+
+$letterSpacing: -0.04em;
+
+$mainColor: #141414;
+$mainLight: rgba(20, 20, 20, 0.24);
+$whiteColor: #fff;
+$blueColor: #9CCAE1;
+$blueColor2: #1967D2;
+$underlineSecondaryColor: #C7C7C7;
+
+
+$menuEase: cubic-bezier(0.8, 0, 0.1, 1);
+
+// Брейк-поинты
+$md0: em($containerWidth - 0.02); // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
+$md1: em($laptop - 0.02); // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
+$md2: em($tablet - 0.02); // Планшеты, некоторые телефоны в горизонтальном положении
+$md3: em($mob - 0.02); // Телефоны L
+$md4: em($mobSmall - 0.02); // Телефоны S
+//====================================================================================================
+// Header options
+$headerHeight: 50;
+$headerMobHeight: 50;

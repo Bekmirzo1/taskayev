@@ -1,3 +1,4 @@
+@use '@/app/scss/abstract' as *;
 .login-page {
   display: flex;
   flex-direction: column;
@@ -35,22 +36,4 @@
   // .login-page__form
   &__form {
   }
-}
-.form {
-  // .form__rows
-  &__rows {
-    display: grid;
-    gap: toRem(20);
-  }
-  // .form__input
-  &__input {
-  }
-		// .form__bottom
-		&__bottom {
-      padding: toRem(40) toRem(0) toRem(0) toRem(0);
-		}
-		// .form__button
-		&__button {
-		}
-
 }

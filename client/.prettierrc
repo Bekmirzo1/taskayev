@@ -1,7 +1,7 @@
 {
   "tabWidth": 2,
   "semi": true,
-  "htmlWhitespaceSensitivity": "ignore",
+  "htmlWhitespaceSensitivity": "strict",
   "bracketSameLine": true,
   "quoteProps": "preserve"
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MenuStore, pageLinks, socialLinks } from "../model/";
+import { MenuStore, pageLinks, headerSocialList } from "../model/";
 // import LogoMain from "@/shared/components/LogoMain.vue";
 import HeaderMobBody from "./components/HeaderMobBody.vue";
 import { LoadStore } from "@/shared/store";
@@ -60,7 +60,7 @@ router.beforeEach((to, from, next) => {
                 <h4 class="menu__row-title">Связаться</h4>
                 <div class="menu__row-body">
                   <ul class="menu__list">
-                    <li v-for="(link, index) in socialLinks" :key="index">
+                    <li v-for="(link, index) in headerSocialList" :key="index">
                       <a :href="link.link" target="_blank">{{ link.name }}</a>
                     </li>
                   </ul>
@@ -74,5 +74,5 @@ router.beforeEach((to, from, next) => {
   </div>
 </template>
 <style lang="scss" scoped>
-@import "styles/menu.scss";
+@use "styles/menu.scss";
 </style>

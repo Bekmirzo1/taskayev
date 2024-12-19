@@ -1,0 +1,94 @@
+@use 'mixins' as *;
+@use 'defaults' as *;
+
+@mixin text () {
+  font-size: toRem(18);
+  // letter-spacing: $letterSpacing;
+  line-height: percent(17, 18);
+  font-weight: 700;
+  -webkit-text-stroke: toRem(0.4) currentColor;
+}
+
+@mixin text2 () {
+  font-size: toRem(15);
+  line-height: percent(14, 15);
+  // letter-spacing: -0.03em;
+  -webkit-text-stroke: toRem(0.3) currentColor;
+}
+
+@mixin text_low () {
+  line-height: percent(17, 18);
+}
+
+@mixin text2_low () {
+  line-height: percent(12, 15);
+}
+
+
+// .text
+.text {
+  @include text();
+  paint-order: stroke fill;
+
+  @media (max-width: $md0) {
+    @include text2();
+  }
+
+}
+
+// .text2
+.text2 {
+  @include text2();
+  paint-order: stroke fill;
+  font-weight: 700;
+}
+
+
+.no-stroke {
+  -webkit-text-stroke: 0rem;
+}
+
+.link {
+  @media (any-hover: hover) {
+    transition: opacity 0.3s ease 0s;
+
+    &:hover {
+      opacity: 0.24;
+    }
+  }
+}
+
+.text-link {
+  @extend .text;
+  @include text_low();
+
+  @media (max-width: $md0) {
+    @include text2_low();
+  }
+
+}
+
+a.text-link {
+  @extend .link;
+}
+
+
+
+.text2-link {
+  @extend .text2;
+  @include text2_low();
+
+}
+
+a.text-link2 {
+  @extend .link;
+}
+
+// .textby
+.textby {
+  font-family: $thirdFamily;
+  font-size: toRem(10);
+  font-weight: 400;
+  line-height: percent(11, 10);
+  letter-spacing: $letterSpacing;
+}

@@ -5,15 +5,13 @@ import {
   type UserAuthDto,
   type UserFullDto,
   type AuthDto,
-} from "../api";
+} from "@/shared/api";
+import { PAGE_ROUTES } from "@/shared/config";
 
 // export default { store: setActivePinia(pinia) };
 export const AuthStore = defineStore("auth-store", () => {
   const isAuth = ref(false);
-  // const authService = AuthService;
-  // const authService = new AuthService();
-  // const item = new AuthServiceComp();
-  // const tokenCookie = useCookie("token", { watch: "shallow" });
+  // const route = useRoute();
   const user = ref({} as AuthDto);
   function setUser(value: AuthDto) {
     user.value = value;
@@ -22,45 +20,27 @@ export const AuthStore = defineStore("auth-store", () => {
     isAuth.value = value;
   }
   function logout() {
-    // const cookie = useCookie('token');
-    // cookie.value = null;
+    const cookie = useCookie("token");
+    cookie.value = null;
+    console.log(cookie.value);
     setUser({} as AuthDto);
     setAuth(false);
+    // if (route.meta.authorized) {
+    //   useRouter().push(PAGE_ROUTES.edit)
+    // }
   }
   function login(user: AuthDto) {
     setUser(user);
     setAuth(true);
+    const tokenCookie = useCookie("token", { watch: "shallow" });
+    tokenCookie.value = user.token;
   }
-  // const authService = AuthService;
-  // async function login(email: string, password: string) {
-  //   try {
-  //     // const data = await AuthService.login(email, password);
-  //     // console.log(data);
-  //     // const data = await AuthServiceComp.login(email, password);
+  function check(user: AuthDto) {
+    setUser(user);
+    setAuth(true);
+    const tokenCookie = useCookie("token", { watch: "shallow" });
+    tokenCookie.value = user.token;
+  }
 
-  //     setAuth(true);
-  //     // setUser(data.user);
-  //   } catch (error) {
-  //     return error;
-  //     // errorResponse(error);
-  //   }
-  // }
-  // function logout() {
-  //   AuthService.logout();
-  //   setAuth(false);
-  //   setUser({} as UserFullDto);
-  // }
-  // async function check() {
-  //   try {
-  //     const data = await AuthService.check();
-  //     setAuth(true);
-  //     setUser(data.user);
-  //   } catch (error: any) {
-  //     errorResponse(error);
-  //   }
-  // }
-  // return { isAuth, user, login, logout, check };
-  // return { isAuth, user, setUser, setAuth, login, logout };
-  return { isAuth, user, login, logout };
-  // return { isAuth, user, some: skipHydrate(authService) };
+  return { isAuth, user, login, logout, check };
 });

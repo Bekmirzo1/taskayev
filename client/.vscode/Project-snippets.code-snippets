@@ -19,24 +19,37 @@
 		"scope": "vue",
 		"prefix": "vueI",
 		"body": [
-		"<script setup lang=\"ts\">"
-		""
-		"</script>"
-		"<template>"
+			"<script setup lang=\"ts\">""""</script>""<template>"
 		"	<div>"
 		"		$0"
-		"	</div>"
-		"</template>"
-		"<style lang=\"scss\" scoped>"
-		""
-		"</style>"
+		"	</div>""</template>""<style lang=\"scss\" scoped>""""</style>"
 		],
 		"description": "Log output to console"
+	},
+	"@use abstract": {
+		"scope": "scss",
+		"prefix": "@usa",
+		"body": "@use \"@/app/scss/abstract\" as *;"
+	},
+	"@extend .no-stroke;": {
+		"scope": "scss",
+		"prefix": "@exnostrk",
+		"body": "@extend .no-stroke;"
 	},
 	"VButton": {
 		"scope": "html, vue",
 		"prefix": "vbtn",
 		"body": "<v-button ${2:type=\"button\"} ${1:href=\"\" target=\"_blank\"}>\n\t${0:@ivantaskayev}\n</v-button>"
+	},
+	"VInput": {
+		"scope": "html, vue",
+		"prefix": "vinp",
+		"body": "<v-input ${1:type=\"text\"} />"
+	},
+	"export default as": {
+		"scope": "javascript, typescript",
+		"prefix": "expdefas",
+		"body": "export { default as $0 } from \"$1\";"
 	},
 	"Gap for scss": {
 		"scope": "scss",
@@ -165,108 +178,84 @@
 		"scope": "scss",
 		"prefix": "@mx",
 		"body": [
-			"@media (max-width: em($1)) {"
-			"    $0"
-		"}"
+			"@media (max-width: em($1)) {""    $0""}"
 		]
 	},
 	"media max-width md0": {
 		"scope": "scss",
 		"prefix": "@mxd0",
 		"body": [
-			"@media (max-width: \\$md0) {"
-			"    $0"
-		"}"
+			"@media (max-width: \\$md0) {""    $0""}"
 		]
 	},
 	"media max-width md1 ": {
 		"scope": "scss",
 		"prefix": "@mxd1",
 		"body": [
-			"@media (max-width: \\$md1) {"
-			"    $0"
-		"}"
+			"@media (max-width: \\$md1) {""    $0""}"
 		]
 	},
 	"media max-width md2 ": {
 		"scope": "scss",
 		"prefix": "@mxd2",
 		"body": [
-			"@media (max-width: \\$md2) {"
-			"    $0"
-		"}"
+			"@media (max-width: \\$md2) {""    $0""}"
 		]
 	},
 	"media max-width md3 ": {
 		"scope": "scss",
 		"prefix": "@mxd3",
 		"body": [
-			"@media (max-width: \\$md3) {"
-			"    $0"
-		"}"
+			"@media (max-width: \\$md3) {""    $0""}"
 		]
 	},
 	"media max-width md4 ": {
 		"scope": "scss",
 		"prefix": "@mxd4",
 		"body": [
-			"@media (max-width: \\$md4) {"
-			"    $0"
-		"}"
+			"@media (max-width: \\$md4) {""    $0""}"
 		]
 	},
 	"media min-width for scss": {
 		"scope": "scss",
 		"prefix": "@mn",
 		"body": [
-			"@media (min-width: em($1)) {"
-			"    $0"
-		"}"
+			"@media (min-width: em($1)) {""    $0""}"
 		]
 	},
 	"media min-width m0": {
 		"scope": "scss",
 		"prefix": "@mnd0",
 		"body": [
-			"@media (min-width: \\$md0) {"
-			"    $0"
-		"}"
+			"@media (min-width: \\$md0) {""    $0""}"
 		]
 	},
 	"media min-width md1": {
 		"scope": "scss",
 		"prefix": "@mnd1",
 		"body": [
-			"@media (min-width: \\$md1) {"
-			"    $0"
-		"}"
+			"@media (min-width: \\$md1) {""    $0""}"
 		]
 	},
 	"media min-width md2": {
 		"scope": "scss",
 		"prefix": "@mnd2",
 		"body": [
-			"@media (min-width: \\$md2) {"
-			"    $0"
-		"}"
+			"@media (min-width: \\$md2) {""    $0""}"
 		]
 	},
 	"media min-width md3": {
 		"scope": "scss",
 		"prefix": "@mnd3",
 		"body": [
-			"@media (min-width: \\$md3) {"
-			"    $0"
-		"}"
+			"@media (min-width: \\$md3) {""    $0""}"
 		]
 	},
 	"media min-width md4": {
 		"scope": "scss",
 		"prefix": "@mnd4",
 		"body": [
-			"@media (min-width: \\$md4) {"
-			"    $0"
-		"}"
+			"@media (min-width: \\$md4) {""    $0""}"
 		]
 	},
 	"media any-hover hover": {

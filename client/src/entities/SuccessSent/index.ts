@@ -1,0 +1,1 @@
+export { default as SuccessSent } from "./ui/SuccessSent.vue";

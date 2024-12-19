@@ -12,7 +12,7 @@ export const pageLinks: LinkObj[] = [
   { link: PAGE_ROUTES.contact, name: "Контакты" },
   // { link: PAGE_ROUTES.edit, name: "Edit" },
 ];
-export const socialLinks: LinkObj[] = [
+export const headerSocialList: LinkObj[] = [
   { link: SOCIAL_LINKS.email, name: "Email" },
   { link: SOCIAL_LINKS.telegram, name: "Telegram" },
   { link: SOCIAL_LINKS.vk, name: "Vkontakte" },

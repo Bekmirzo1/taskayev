@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --dotenv .env.development",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -14,24 +14,22 @@
     "@nuxt/kit": "^3.13.1",
     "@nuxtjs/device": "^3.2.2",
     "@pinia/nuxt": "^0.5.4",
-    "@tiptap/pm": "^2.7.2",
-    "@tiptap/starter-kit": "^2.7.2",
-    "@tiptap/vue-3": "^2.7.2",
     "@types/three": "^0.168.0",
     "axios": "^1.7.7",
     "brotli": "^1.3.3",
     "ckeditor5": "^43.1.0",
     "gsap": "^3.12.5",
+    "maska": "^3.0.4",
     "nuxt": "^3.13.2",
     "pinia": "^2.2.2",
-    "three": "^0.168.0",
-    "vue": "latest"
+    "three": "^0.168.0"
   },
   "devDependencies": {
     "@nuxt/eslint": "^0.5.5",
     "eslint": "^9.9.1",
     "prettier": "^3.3.3",
-    "sass": "^1.77.8",
+    "sass": "^1.80.4",
+    "sass-migrator": "^2.2.1",
     "typescript": "^5.5.4"
   }
 }

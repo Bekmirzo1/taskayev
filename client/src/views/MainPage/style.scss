@@ -1,8 +1,8 @@
+@use '@/app/scss/abstract' as *;
+
 .fullscreen {
   position: relative;
   min-height: 100vh;
-
-
 
   @media (min-width: $md2) {
     min-height: clamp(toRem(550), 100vh, toRem(9999));
@@ -134,6 +134,7 @@
     // .fullscreen__item-text
     &-text {
       @extend .title2;
+      font-variation-settings: "EXPO" -45;
       text-transform: capitalize;
     }
 

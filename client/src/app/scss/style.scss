@@ -1,57 +1,25 @@
 @use "sass:math";
-@import "mixins.scss";
-@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-@import "fonts.scss";
-
-$fontFamily: "Anonymous Pro";
-$secondFamily: 'ExposureTrialVAR';
-$thirdFamily: '5by7';
-
-
-$fontSize: toRem(18);
-
-$letterSpacing: -0.04em;
-
-$mainColor: #141414;
-$mainLight: rgba(20, 20, 20, 0.24);
-$whiteColor: #fff;
-$blueColor: #9CCAE1;
-
-$menuEase: cubic-bezier(0.8, 0, 0.1, 1);
-
-// Настройки адаптивной сетки ===============================================================================================================================================================================================================================================================================================
-$minWidth: 375;
-$maxWidth: 1920;
-$maxWidthContainer: 1170;
-$containerPadding: 24;
-$containerPaddingMob: 12;
-
-$maxHeight: 1080;
-
-// Ширина срабатываемых брейкпоинтов
-$containerWidth: $maxWidth - 0.02;
-$laptop: 1365.98;
-$tablet: 995.98;
-$mob: 767.98;
-$mobSmall: 479.98;
-
-// Брейк-поинты
-$md0: em($containerWidth - 0.02); // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
-$md1: em($laptop - 0.02); // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
-$md2: em($tablet); // Планшеты, некоторые телефоны в горизонтальном положении
-$md3: em($mob); // Телефоны L
-$md4: em($mobSmall); // Телефоны S
-//====================================================================================================
-// Header options
-$headerHeight: 50;
-$headerMobHeight: 50;
+@use "null";
+@use "abstract" as *;
+@use "forms";
 
 
 
-@import "null";
+
+
+$scrollbarWidth: 10;
 
 html {
   scroll-behavior: smooth;
+  // &:not(:has(.main)) {
+  //   scrollbar-gutter: stable;
+  // }
+  --scrollbar-right: #{toRem($scrollbarWidth)};
+
+  &:not(:has(.main)) {
+    --scrollbar-right-active: #{toRem($scrollbarWidth)};
+  }
+
   --container-padding: #{toRem($containerPaddingMob)};
 
   @media (min-width: $md1) {
@@ -64,6 +32,24 @@ html {
   }
 }
 
+@media (any-hover: hover) {
+  ::-webkit-scrollbar {
+    width: var(--scrollbar-right);
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
 
 body {
   font-weight: 700;
@@ -71,8 +57,21 @@ body {
 
   overflow: hidden;
 
+  &:not(:has(.main)) {}
+
+  .app__wrapper-cover {
+    @media (any-hover: hover) {
+      padding: 0px var(--scrollbar-right-active) 0px 0px;
+    }
+  }
+
   .unlock & {
     overflow: auto;
+    --scrollbar-right-active: 0;
+    // .app__wrapper-cover,
+    // .header:not(.bigger) {
+    //   padding: 0px 0px 0px 0px;
+    // }
   }
 
 }
@@ -91,6 +90,3 @@ body {
   margin: 0 auto;
   padding: 0 var(--container-padding);
 }
-
-@import "common";
-@import "forms";

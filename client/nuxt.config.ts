@@ -5,12 +5,12 @@ const development: boolean = process.env.NODE_ENV !== "production";
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   app: {
-    baseURL: development ? "/" : "/sites/taskayev2/",
-    // baseURL: "/",
+    // baseURL: development ? "/" : "/sites/taskayev2/",
+    baseURL: "/",
   },
   devtools: { enabled: false },
   srcDir: "src/",
-  modules: ["@nuxt/eslint", "@nuxtjs/device", "@pinia/nuxt",],
+  modules: ["@nuxt/eslint", "@nuxtjs/device", "@pinia/nuxt"],
   build: {
     // Без этого (transpile: ["gsap"]) проект c gsap не генерится в production
     transpile: ["gsap"], // https://nuxt.com/docs/api/nuxt-config#transpile
@@ -30,7 +30,8 @@ export default defineNuxtConfig({
   },
   imports: {
     dirs: [
-      'shared/composables'
+      'shared/composables',
+      'shared/utils',
     ]
   },
   hooks: {
@@ -73,7 +74,9 @@ export default defineNuxtConfig({
       preprocessorOptions: {
         scss: {
           api: 'modern-compiler',
-          additionalData: '@use "@/app/scss/style.scss" as *;'
+          // additionalData: '@use "@/app/scss/style.scss" as *;'
+          // additionalData: '@use "@/app/scss/abstract" as *; @use "@/app/scss/common.scss" as *;'
+          additionalData: '@use "@/app/scss/abstract" as *;'
           // imports: [{
 
           //   'src/app/scss/style.scss'

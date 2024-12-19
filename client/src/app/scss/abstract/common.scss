@@ -1,3 +1,6 @@
+@use 'mixins' as *;
+@use 'defaults' as *;
+
 .nowrap {
   white-space: nowrap;
 }
@@ -48,101 +51,8 @@
   font-size: toRem(22);
   line-height: percent(23, 22);
   font-weight: 400;
-  font-variation-settings: "EXPO" -45;
+  // font-variation-settings: "EXPO" -45;
   // letter-spacing: $letterSpacing;
-}
-
-//====================================================================================================
-// TEXTS
-
-@mixin text () {
-  font-size: toRem(18);
-  // letter-spacing: $letterSpacing;
-  line-height: percent(17, 18);
-  font-weight: 700;
-  -webkit-text-stroke: toRem(0.4) currentColor;
-}
-
-@mixin text2 () {
-  font-size: toRem(15);
-  line-height: percent(14, 15);
-  // letter-spacing: -0.03em;
-  -webkit-text-stroke: toRem(0.3) currentColor;
-}
-
-@mixin text_low () {
-  line-height: percent(17, 18);
-}
-
-@mixin text2_low () {
-  line-height: percent(12, 15);
-}
-
-
-
-
-// .text
-.text {
-  @include text();
-  paint-order: stroke fill;
-
-  @media (max-width: $md0) {
-    @include text2();
-  }
-
-}
-
-// .text2
-.text2 {
-  @include text2();
-  paint-order: stroke fill;
-  font-weight: 700;
-}
-
-
-.link {
-  @media (any-hover: hover) {
-    transition: opacity 0.3s ease 0s;
-
-    &:hover {
-      opacity: 0.24;
-    }
-  }
-}
-
-.text-link {
-  @extend .text;
-  @include text_low();
-
-  @media (max-width: $md0) {
-    @include text2_low();
-  }
-
-}
-
-a.text-link {
-  @extend .link;
-}
-
-
-
-.text2-link {
-  @extend .text2;
-  @include text2_low();
-
-}
-
-a.text-link2 {
-  @extend .link;
-}
-
-// .textby
-.textby {
-  font-family: $thirdFamily;
-  font-size: toRem(10);
-  font-weight: 400;
-  line-height: percent(11, 10);
-  letter-spacing: $letterSpacing;
 }
 
 //====================================================================================================
@@ -165,11 +75,45 @@ a.text-link2 {
     content: "";
     position: absolute;
     width: 100%;
-    bottom: 11%;
+    bottom: 10%;
     // bottom: 0;
     left: 0;
     height: toRem(1);
     background-color: currentColor;
     // @include transMultiple(opacity visibility, $trsDur, ease, 0s);
+  }
+}
+.link-underline2 {
+  // text-decoration: underline;
+  // &:link, &:visited{
+  //   text-decoration: underline;
+  // }
+  position: relative;
+
+  // @media (any-hover: hover) {
+  //   &:hover {
+  //     &::after {
+  //       opacity: 0;
+  //       visibility: hidden;
+  //     }
+  //   }
+  // }
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    bottom: 0%;
+    // bottom: 0;
+    left: 0;
+    height: toRem(1);
+    background-color: currentColor;
+    // @include transMultiple(opacity visibility, $trsDur, ease, 0s);
+  }
+}
+//====================================================================================================
+
+.block-tablet{
+  @media (max-width: $md1) {
+      display: block;
   }
 }

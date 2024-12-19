@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import type { InfoDto } from '@/shared/api';
+
 useHead({
   title: 'About'
 })
+
+
 </script>
 <template>
   <div class="about">

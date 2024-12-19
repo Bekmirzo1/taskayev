@@ -1,0 +1,31 @@
+@use "@/app/scss/abstract" as *;
+
+
+
+.contact-form {
+
+  // .contact-form__blocks
+  &__blocks {
+    display: grid;
+    gap: toRem(80);
+  }
+
+  // .contact-form__select
+  &__select {
+    margin: toRem(2) toRem(0) toRem(0) toRem(0);
+  }
+
+  // .contact-form__textarea
+  &__textarea {
+    margin: toRem(8) toRem(0) toRem(0) toRem(0);
+  }
+
+  // .contact-form__privacy
+  &__privacy {
+    margin: toRem(12) toRem(0) toRem(0) toRem(0);
+    text-align: center;
+    @extend .text;
+  }
+
+
+}

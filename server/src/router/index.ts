@@ -1,3 +1,4 @@
+import contactController from "@/controllers/contactController";
 import infoController from "@/controllers/infoController";
 import userController from "@/controllers/userController";
 import authMiddlware from "@/middleware/authMiddlware";
@@ -10,6 +11,7 @@ const router = Router();
 router.post('/info', infoController.changeInfo)
 router.get('/info', infoController.showInfo)
 router.post('/login', userController.login)
+router.post('/contact', contactController.submitForm)
 router.post('/registration', userController.registraiton)
 router.get('/check', authMiddlware(process.env.MY_ROLE_ADMIN), userController.check)
 router.post('/users', authMiddlware(process.env.MY_ROLE_ADMIN), userController.getAll)

@@ -49,7 +49,7 @@ watch(imagesLoaded, (newVal) => {
     onComplete() {
       if (value === 100) {
         loadState.loadApp();
-        // animaetLoaded();
+        // animateLoaded();
       }
     },
   });

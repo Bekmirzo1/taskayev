@@ -1,11 +1,6 @@
-export interface InputType {
-  input: string;
-  checkType?: "email" | "password";
-  correct?: boolean;
-  required?: boolean;
-}
-export interface InputTypes {
+import type { InputType, InputTypes } from "@/shared/forms/input";
+
+export interface InputTypesLogin extends InputTypes {
   inputEmail: InputType;
   inputPassword: InputType;
-  [key: string]: InputType;
 }

@@ -7,8 +7,8 @@ import { MenuStore, pageLinks } from "../model/";
 import LinkBegin from "./components/LinkBegin.vue";
 import LogoutButton from "./components/LogoutButton.vue";
 import { AuthStore } from "@/shared/store";
-import type { AuthDto } from "@/shared/api";
 import { PAGE_ROUTES } from "@/shared/config";
+import { AuthService } from "@/shared/api";
 // import { PageRouteStore } from "@/shared/store";
 const route = useRoute();
 const authStore = AuthStore();
@@ -42,18 +42,19 @@ watch(
   },
 );
 
-function logout() {
-  const cookie = useCookie("token");
-  // console.log(cookie.value);
-  cookie.value = null;
-  console.log(cookie.value);
+
+
+async function logout() {
+  //  console.log('dsadas');
+  // await AuthService.exp()
+  
   authStore.logout();
-  if (route.meta.authed) {
-    router.push(PAGE_ROUTES.login)
+  // const logout = AuthService.logout()
+  if (route.meta.authorized) {
+    // await navigateTo({path:PAGE_ROUTES.login, query: {redirect: route.path}})
+    await navToLogin(route.path);
+    // navigateTo(PAGE_ROUTES.login)
   }
-  // authStore.setUser({} as AuthDto);
-  // authStore.setAuth(false);
-  // console.log('dasdsa');
 }
 </script>
 <template>
@@ -92,5 +93,5 @@ function logout() {
   </header>
 </template>
 <style lang="scss" scoped>
-@import "styles/style.scss";
+@use "styles/style.scss";
 </style>

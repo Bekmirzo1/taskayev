@@ -1,0 +1,39 @@
+@use "@/app/scss/abstract" as *;
+
+
+.errors-block {
+  position: fixed;
+  bottom: toRem(20);
+  right: toRem(20);
+  z-index: 1000;
+
+  // .errors-block__body
+  &__body {
+    background-color: $mainColor;
+    color: $whiteColor;
+    padding: toRem(16) toRem(27) toRem(16) toRem(16);
+    font-size: toRem(13);
+  }
+
+  // .errors-block__list
+  &__list {
+    li {
+      &:not(:last-child) {
+        margin-bottom: toRem(16);
+      }
+    }
+  }
+
+  // .errors-block__icon
+  &__icon {
+    position: absolute;
+    width: toRem(15);
+    top: toRem(6);
+    right: toRem(6);
+
+    img,
+    svg {
+      max-width: 100%;
+    }
+  }
+}

@@ -14,17 +14,20 @@ import { Ckeditor } from "@ckeditor/ckeditor5-vue";
 import "ckeditor5/ckeditor5.css";
 import { InfoService, type InfoDto } from "@/shared/api";
 // definePageMeta({
-//   authed: true,
+//   authorized: true,
 // });
+useHead({
+  title: "Редактирование",
+});
 // const route = useRoute();
 // console.log(route.meta);
-const { data } = await useAuthAPI<InfoDto>("/info", { method: "GET" });
-console.log(data.value.description);
+const { data, refresh } = await useAuthAPI<InfoDto>("/info", { method: "GET" });
 
 const editor = ref(ClassicEditor);
-const editorData = ref(
-  `Дизайн сайтов, интерфейсов, приложений.<br />Для тех, кому нужно лучшее.<br />Делаю ваших клиентов счастливее.`,
-);
+// const editorData = ref(
+//   `Дизайн сайтов, интерфейсов, приложений.<br />Для тех, кому нужно лучшее.<br />Делаю ваших клиентов счастливее.`,
+// );
+const editorData = ref(data.value.description);
 const editorConfig = {
   plugins: [
     GeneralHtmlSupport,
@@ -80,8 +83,8 @@ async function sendData() {
   }
   formData.append("description", editorData.value);
   formData.append("items", items.value.join(", "));
-  const data = await InfoService.changeInfo(formData);
-  console.log(data);
+  const dataSend = await InfoService.changeInfo(formData);
+  console.log(dataSend);
 }
 /* onMounted(() => {
   editor.value = ClassicEditor;

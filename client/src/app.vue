@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { BaseHeader, HeaderMob } from "@/widgets/BaseHeader/";
+import { BaseFooter } from "@/widgets/BaseFooter/";
 import gsap from "gsap";
 import { PreloadElem } from "./app/Preload";
 import { MediaStore } from "./shared/libs/media";
 import { CustomMouse2 } from "./shared/UI/CustomMouse";
-import { PAGE_ROUTES, productionMode } from "@/shared/config/";
+import { productionMode } from "@/shared/config/";
 import { AuthStore, LoadStore, PageLockStore } from "./shared/store";
 import type { AuthDto } from "./shared/api";
 
@@ -16,6 +17,7 @@ gsap.registerEase("easeInQuad", function (progress) {
 });
 const authStore = AuthStore();
 const { isDesktop } = useDevice();
+const route = useRoute();
 const router = useRouter();
 const loadState = LoadStore();
 const lockState = PageLockStore();
@@ -102,17 +104,32 @@ onMounted(() => {
 
 const coverValue = ref({ clipVal: 100 });
 const coverOnLoaded = ref({ y: 100, scale: 0.9 });
+try {
+  const user = await useAuthAPI<AuthDto>("/check", { method: "GET" });
+  if (user.data.value) {
+    authStore.check(user.data.value);
+  } else if (route.meta.authorized) {
+    // await navigateTo({
+    //   path: PAGE_ROUTES.login,
+    //   query: { redirect: route.path },
+    // });
+    await navToLogin(route.path);
+  }
+} catch (error) {
+  console.log(error);
+}
+
 if (productionMode) {
   watch(
     () => loadState.loaded,
     (newVal) => {
       if (newVal) {
-        animaetLoaded();
+        animateLoaded();
       }
     },
     { once: true },
   );
-  function animaetLoaded() {
+  function animateLoaded() {
     const timeline = gsap.timeline({
       defaults: { duration: 1, ease: "easeInQuad" },
       onComplete() {
@@ -141,21 +158,6 @@ if (productionMode) {
   });
   loadState.fullLoad();
 }
-
-try {
-  const user = await useAuthAPI<AuthDto>("/check", { method: "GET" });
-  if (user.data.value) {
-    authStore.login(user.data.value);
-    const tokenCookie = await useCookie("token", { watch: "shallow" });
-    console.log(tokenCookie.value);
-    tokenCookie.value = user.data.value.token;
-  }
-} catch (error) {
-  console.log(error);
-  // if (error instanceof Error) {
-  //   console.log(error);
-  // }
-}
 </script>
 <template>
   <div
@@ -182,6 +184,7 @@ try {
         <HeaderMob v-if="mediaStore.checkMedia('mob')" />
         <BaseHeader />
         <NuxtPage class="page" />
+        <BaseFooter />
       </div>
     </div>
     <ClientOnly>
@@ -195,19 +198,21 @@ try {
 </template>
 
 <style lang="scss">
-// @use './app/scss/style';
+@use "./app/scss/style";
 html.custom-cursor,
 .custom-cursor body {
-  cursor: none;
-  a,
-  button {
-    cursor: none;
+  cursor: none !important;
+  // a,
+  // button,
+  // input {
+  * {
+    cursor: none !important;
   }
 }
 
-.page {
-  padding: toRem($headerHeight) toRem(0) toRem(0) toRem(0);
-}
+// .page {
+//   padding: toRem($headerHeight) toRem(0) toRem(0) toRem(0);
+// }
 .cover-full {
   position: absolute;
   width: 100%;

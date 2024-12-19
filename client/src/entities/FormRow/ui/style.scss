@@ -1,0 +1,82 @@
+@use "@/app/scss/abstract" as *;
+
+.form-row {
+  $rowWidth: 1247;
+
+  // .form-row__body
+  &__body {
+    display: flex;
+    gap: toRem(20);
+    justify-content: space-between;
+    @extend .text;
+    @media (max-width: $md1) {
+        flex-direction: column-reverse;
+        padding: toRem(12) toRem(0) toRem(0) toRem(0);
+    }
+  }
+
+  // .form-row__column
+  &__column {
+    @media (max-width: $md0) {
+      flex: 0 1 50%;
+    }
+
+    // .form-row__column_left
+    &_left {
+      @media (min-width: $md0) {
+        flex: 0 0 percent(614, $rowWidth);
+      }
+
+      @media (max-width: $md0) {
+
+        max-width: toRem(614);
+      }
+      @media (max-width: $md1) {
+          max-width: 100%;
+      }
+    }
+
+    // .form-row__column_right
+    &_right {
+      @media (min-width: $md0) {
+
+        flex: 0 0 percent(455, $rowWidth);
+      }
+
+      @media (max-width: $md0) {
+        max-width: toRem(455);
+        // width: 100%;
+      }
+      @media (max-width: $md1) {
+          max-width: 100%;
+      }
+    }
+  }
+
+  // .form-row__item
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    padding: toRem(0) toRem(0) toRem(6) toRem(0);
+    border-bottom: toRem(2) solid $mainColor;
+  }
+
+  // .form-row__title
+  &__title {
+    @extend .no-stroke;
+    user-select: none;
+  }
+
+  // .form-row__number
+  &__number {
+    @extend .no-stroke;
+    user-select: none;
+  }
+
+  // .form-row__type
+  &__type {
+    user-select: none;
+    text-transform: uppercase;
+    -webkit-text-stroke-width: toRem(0.4);
+  }
+}
