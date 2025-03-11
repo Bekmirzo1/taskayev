@@ -8,6 +8,7 @@ import { CustomMouse2 } from "./shared/UI/CustomMouse";
 import { productionMode } from "@/shared/config/";
 import { AuthStore, LoadStore, PageLockStore } from "./shared/store";
 import type { AuthDto } from "./shared/api";
+useHead({ htmlAttrs: { lang: "ru" } });
 
 gsap.registerEase("easeOutCubic", function (progress) {
   return 1 - Math.pow(1 - progress, 3);
